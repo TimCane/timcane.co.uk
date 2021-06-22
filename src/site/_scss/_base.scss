@@ -5,7 +5,7 @@ body {
     font-size: 1.5em;
     line-height: 1.6;
     font-weight: 400;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     color: #222;
 
     max-width: 800px;
@@ -13,10 +13,7 @@ body {
     padding: 0 10px;
 }
 
-pre{
-    overflow: auto;
-}
-
+// Headers
 h1,
 h2,
 h3,
@@ -24,6 +21,29 @@ h4,
 h5,
 h6 {
     font-family: "Montserrat", sans-serif;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     font-weight: 600;
+}
+
+// List
+ul,
+ol {
+    padding-left: 16px;
+    li {
+        padding-left: 16px;
+        text-indent: -16px;
+    }
+
+    ol,ul{
+        padding-left: 0;
+    }
+}
+
+// Code
+pre {
+    padding: 16px;
+    margin: 16px 0;
+    background: $clr-bg-pre;
+    overflow: auto;
+    border-radius: 2px;
 }
