@@ -1,4 +1,5 @@
 const pluginSass = require("eleventy-plugin-sass");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function (config) {
 
@@ -11,6 +12,9 @@ module.exports = function (config) {
         outputDir: "dist/assets/css/",
         remap: true
     });
+
+    //Register the syntax highlight plugin
+    config.addPlugin(syntaxHighlight);
 
     return {
         dir: {
