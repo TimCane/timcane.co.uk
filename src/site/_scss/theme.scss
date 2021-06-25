@@ -1,7 +1,33 @@
 @import "_variables";
-
 @import "_reset";
-@import "_base";
 
-@import "home";
+// Theme
+@import 'theme/base';
+@import 'theme/typography';
+@import 'theme/forms';
+@import 'theme/range';
+@import 'theme/links';
+@import 'theme/code';
+@import 'theme/misc';
+@import 'theme/print';
 
+
+//page specific
+@import "pages/home";
+
+
+
+
+/*
+
+INSPIRATION:
+
+Links:
+- https://thetab.com/uk/2021/06/25/quiz-what-all-stars-6-queen-are-you-212299 
+
+General:
+- https://github.com/kognise/water.css/tree/master/src/parts
+
+
+
+*/
