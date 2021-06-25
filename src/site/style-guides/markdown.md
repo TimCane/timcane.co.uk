@@ -1,4 +1,5 @@
 [View Html](/style-guides/html)
+[View Code](/style-guides/code)
 
 # Markdown cheatsheet
 

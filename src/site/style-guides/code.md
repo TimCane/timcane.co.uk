@@ -1,3 +1,6 @@
+[View Html](/style-guides/html)
+[View Markdown](/style-guides/markdown)
+
 ```html
 <!DOCTYPE html>
 <title>Title</title>
