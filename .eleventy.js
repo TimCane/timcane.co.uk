@@ -8,7 +8,7 @@ module.exports = function (config) {
 
     //Register the SASS plugin.
     config.addPlugin(pluginSass, {
-        watch: ["**/theme.scss"],
+        watch: ["**/theme.scss","**/layouts/*.scss"],
         outputDir: "dist/assets/css/",
         remap: true
     });

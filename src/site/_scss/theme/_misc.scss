@@ -135,7 +135,7 @@ dialog > header:first-child {
 }
 
 dialog::backdrop {
-  background: #0000009c;
+  background: $dialog-backdrop;
   backdrop-filter: blur(0.4rem);
 }
 

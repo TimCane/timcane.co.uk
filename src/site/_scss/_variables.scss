@@ -3,15 +3,34 @@ $orange: #FE7F2D;
 $white: #fff;
 $black: #171717;
 
-// Control Specific
 $links-accent: $orange;
 $links-colour: $black;
+$links-print: #00f;
+
+$table-print:#f2f2f2;
 
 $focus: rgba($orange, .65);
 
+$dialog-backdrop: rgba($black, .60);
 
-
-// Unsorted!
+$code-colour: $black;
+$code-selection: #c1def1;
+$code-comment: #008000;
+$code-string:#a31515;
+$code-punctuation: #393a34;
+$code-variable: #36acaa;
+$code-keyword: #0000ff;
+$code-function: #393a34;
+$code-deleted: #9a050f;
+$code-selector: #00009f;
+$code-important: #e90;
+$code-class-name:#2b91af;
+$code-selector:#800000;
+$code-property:#ff0000;
+$code-bg-tag: #ffff00;
+$code-tag: #393a34;
+$code-line-numbers:#a5a5a5;
+$code-line-rows:#2b91af;
 
 $background-body: $white;
 $background: #efefef;
@@ -21,10 +40,10 @@ $text-main: #363636;
 $text-bright: $black;
 $text-muted: #70777f;
 
-
+$range-shadow:#0d0d0d;
+$range-border:#010101;
 
 $border: #dbdbdb;
-$code: $black;
 $animation-duration: 0.1s;
 $button-hover: #ddd;
 $scrollbar-thumb: darken($button-hover, 3);

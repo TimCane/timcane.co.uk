@@ -43,11 +43,11 @@
     }
   
     tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: $table-print;
     }
   
     a {
-      color: #00f;
+      color: $links-print;
       text-decoration: underline;
     }
   }
