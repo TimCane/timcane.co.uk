@@ -1,13 +1,3 @@
 {
-    "layout": "page",
-    "navlinks": [
-        {
-            "link": "/projects",
-            "name": "Projects"
-        },
-        {
-            "link": "/curriculum-vitae",
-            "name": "CV"
-        }
-    ]
+    "layout": "page"
 }
