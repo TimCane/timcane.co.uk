@@ -1,0 +1,10 @@
+@import "page";
+
+h3,
+h4 {
+    overflow: hidden;
+    clear: both;
+    strong {
+        float: right;
+    }
+}
