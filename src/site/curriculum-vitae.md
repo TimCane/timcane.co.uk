@@ -1,103 +1,45 @@
 ---
+title: CV
 cssfile: cv.css
 ---
 
 # Tim Cane
-- 📍 Surrey, United Kingdom
-- 🌐 [Website](https://timcane.co.uk)
-- 🌐 [Github](https://github.com/TimCane)
-- 🌐 [LinkedIn](https://www.linkedin.com/in/timcane/)
+Surrey, UK
+
+
+[Github](https://github.com/TimCane) · [LinkedIn](https://www.linkedin.com/in/timcane/)
 
 ___
-## Summary
 
-I am a Full-Stack developer with industry experience building highly transactional and robust architectures. I specialize in front end development with professional experience working with C# and Angular. I also have experience working with Azure, D365, KnockoutJS, TSQL, DevOps.
+I am a Full-Stack developer with industry experience building highly transactional and robust architectures. I specialize in front end development with professional experience working with The Microsoft Stack, particularly C# and Angular in the Azure Platform.. I am the first port of call when it comes to designing highly performant web applications user experiences, and server side APIs for my current company’s core product and largest customers.
 
-___
-## Skills
+## Technical Proficiencies
 
-C#,
-.Net Framework / Core / Standard,
-Entity Framework,
-TSQL,
-ASP.NET,
-Telerik,
-JavaScript,
-TypeScript,
-Angular,
-HTML,
-CSS,
-KnockoutJS,
-Bootstrap,
-jQuery,
-MVC,
-MVP,
-MVVM,
-DevOps,
-Azure,
-D365,
-DotNetNuke,
-Node,
-NPM,
-TFS,
-JSON,
-AJAX,
-XML,
-Bootstrap,
-SQL Server,
-IIS,
-Visual Studio,
-log4net,
-Octopus,
-WCF
-___
+C#, .Net Framework / Core / Standard, Azure, Entity Framework, TSQL, ASP.NET, Telerik, JavaScript, TypeScript, Angular, ReactJS, VueJS, KnockoutJS, Bootstrap, jQuery, Design Patterns, DevOps, Dynamics365, DotNetNuke, Node, NPM, TFS/Git, AJAX, Bootstrap, SQL, , Mocking Frameworks, Octopus Deploy,WCF
+
 ## Work Experience
 
-### Silverbear **Guildford, UK.**
+### **Senior Full-Stack Developer**, Silverbear
+**{% duration '09/2013' 'present' %}**
 
-#### Senior Full-Stack Developer **{% duration '03/2021' 'present' %}**
+**Prior Roles:** Full-Stack Developer, Junior Full-Stack Developer, Apprentice Full-Stack Developer.
 
-Team: *Core Product*
-- Implement high-quality product/project user stories
-- Be part of the core team to design and develop a new finance system
-- Providing technical assistance to members of the support/consultancy/development teams
-- Be a reliable source of knowledge on the product
-- Assisted in the recruitment process
+- Joined as part of the apprenticeship program and passed with the highest grades in Silverbear history.
+- Led the implementation of highly performant digital solutions for the UK’s largest
+- Membership associations/Professional bodies.
+- Part of the core team to design and develop a new real-time, high transaction finance system.
+- Worked as the Principal web developer across Silverbear, leading the UI efforts for both Core product web portals as well as bespoke web applications.
+- Mentored junior/graduate developers.
+- Lead developer on the Silverbear Events Management System.
+- Assisted in the recruitment process for new developers and testers.
+- Lead customer workshops for both requirements gathering and training.
+- Designing high impact user, user-friendly UX journeys.
+- Liaising with customers and consultancy teams for both Agile and Waterfall improvements of products and features.
 
-
-
-#### Full-Stack Developer **{% duration '02/2018' '03/2021' %}**
-
-Team: *Core Product*
-- Implement high-quality product/project user stories
-- Key knowledge holder for the product.
-- Providing technical assistance to members of the support/consultancy/development teams
-- Mentored the Apprentice Developers
-
-
-#### Junior Full-Stack Developer **{% duration '8/2014' '02/2018' %}**
-
-
-Team: *3rd Line Support, Change Request*
-- Gather requirements from clients
-- Implement bespoke feature requests from clients to fit their requirements
-- Provided technical assistance to the 1st/2nd line support team
-
-
-
-#### Apprentice Developer **{% duration '9/2013' '08/2014' %}**
-
-Team: *3rd Line Support*
-- Implemented bug fixes on all aspects of the product.
-- Provided technical assistance to the 1st/2nd line support team
-
-
-___
 ## Volunteer Experience
 
-### 1st Chertsey Scout Group **Chertsey, UK.**
-
-#### Scout Leader **{% duration '3/2013' 'present' %}**
+### **Scout Leader**, 1st Chertsey Scout Group
+**{% duration '03/2013' 'present' %}**
 
 This includes planning and running weekly meetings, yearly camps, and other events. I’m responsible for the safety and wellbeing of up to 35 young people aged between 10 and 14, including during potentially hazardous adventurous activities.
 
@@ -107,28 +49,26 @@ This includes planning and running weekly meetings, yearly camps, and other even
 - I can identify any potential risks (and whom the risks might affect) for different activities.
 - I can work out ways to minimise these risks. showing maturity and responsibility, initiative, decision making, communication skills, and ability to identify, discuss, and minimise potential hazards.
 
-___
+
 ## Education
 
-### QA Apprentiship **London/Guildford, UK.**
-
-#### City & Guilds Software Developer **{% duration '9/2013' '08/2014' %}**
+### **City & Guilds Apprentiship**, QA Apprentiship
+**{% duration '9/2013' '08/2014' %}**
 
 - Completed 8 Weeks of bootcamp learning software development fundamentals
 - Developed and improved my skills with on the job experience
 
-### Woking College **Woking, UK.**
+### **A-Level's**, Woking College
+**{% duration '9/2011' '9/2013' %}**
 
-#### A-Level Computer Science **{% duration '9/2011' '9/2013' %}**
-#### A-Level Electronics **{% duration '9/2011' '9/2013' %}**
-#### BTEC Information Technology **{% duration '9/2011' '9/2013' %}**
+- A-Level Computer Science 
+- A-Level Electronics
+- BTEC Information Technology
 
-___
 ## Interests
-- Running
-  - Participating in weekly 5k Parkrun events
-  - Social running with friends to improve fitness
-- Cycling
-- Computer Games
-- Programming
-- Camping
+
+- Running a weekly parkrun
+- Cycling fast down hills
+- Playing computer games
+- Programming personal projects
+- Camping with my scout troop

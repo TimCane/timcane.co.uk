@@ -4,7 +4,7 @@ module.exports = function (startString, finishString) {
 
     var duration = calculateMonthDiff(start, finish);
 
-    return `${start.formatted} - ${finish.formatted} (${duration.formatted})`;
+    return `${start.formatted} - ${finish.formatted}`;// (${duration.formatted})`;
 }
 
 function getValue(date) {
@@ -72,4 +72,4 @@ function prefix(number, single, multiple) {
     return `${number == 1 ? single : multiple}`
 }
 
-Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
