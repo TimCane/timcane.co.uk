@@ -11,11 +11,11 @@ Surrey, UK
 
 ___
 
-I am a Full-Stack developer with industry experience building highly transactional and robust architectures. I specialize in front end development with professional experience working with The Microsoft Stack, particularly C# and Angular in the Azure Platform.. I am the first port of call when it comes to designing highly performant web applications user experiences, and server side APIs for my current company’s core product and largest customers.
+I am a Full-Stack developer with over 8 years of enterprise experience building highly transactional and robust architectures. I specialize in front end development with professional experience working with The Microsoft Stack, particularly C# and Angular in the Azure Platform. I am proficient at designing highly performant web applications, user experiences and server-side APIs for product centric.
 
 ## Technical Proficiencies
 
-C#, .Net Framework / Core / Standard, Azure, Entity Framework, TSQL, ASP.NET, Telerik, JavaScript, TypeScript, Angular, ReactJS, VueJS, KnockoutJS, Bootstrap, jQuery, Design Patterns, DevOps, Dynamics365, DotNetNuke, Node, NPM, TFS/Git, AJAX, Bootstrap, SQL, , Mocking Frameworks, Octopus Deploy,WCF
+C#, .Net Framework / Core / Standard, Azure, Entity Framework, TSQL, ASP.NET, Telerik, JavaScript, TypeScript, Angular, ReactJS, VueJS, KnockoutJS, Bootstrap, jQuery, Design Patterns, DevOps, Dynamics 365, DotNetNuke, Node, NPM, TFS/Git, AJAX, Bootstrap, SQL, Mocking Frameworks, Octopus Deploy, WCF, OData
 
 ## Work Experience
 
@@ -24,17 +24,21 @@ C#, .Net Framework / Core / Standard, Azure, Entity Framework, TSQL, ASP.NET, Te
 
 **Prior Roles:** Full-Stack Developer, Junior Full-Stack Developer, Apprentice Full-Stack Developer.
 
-- Joined as part of the apprenticeship program and passed with the highest grades in Silverbear history.
-- Led the implementation of highly performant digital solutions for the UK’s largest
-- Membership associations/Professional bodies.
+I Joined Silverbear as part of the apprenticeship program and passed with the highest grades in
+Silverbear history. I quickly worked through the ranks there and soon became a senior developer
+embedded in the core product team.
+
+- Leading the implementation of highly performant digital solutions for the UK’s largest Membership associations/Professional bodies.
 - Part of the core team to design and develop a new real-time, high transaction finance system.
-- Worked as the Principal web developer across Silverbear, leading the UI efforts for both Core product web portals as well as bespoke web applications.
-- Mentored junior/graduate developers.
+-  Working as the Principal web developer across Silverbear, leading the UI efforts for both Core product web portals as well as bespoke web applications.
+- Training & Mentoring of junior/graduate developers.
 - Lead developer on the Silverbear Events Management System.
-- Assisted in the recruitment process for new developers and testers.
-- Lead customer workshops for both requirements gathering and training.
-- Designing high impact user, user-friendly UX journeys.
+- Assisting in the recruitment process for new developers and testers.
+- Leading customer workshops for both requirements gathering and training.
+- Designing high impact user, user friendly UX journeys.
 - Liaising with customers and consultancy teams for both Agile and Waterfall improvements of products and features.
+- Introduced both Angular and Vue.JS to the company and they are now standard across the organization.
+- Creation and Maintenance CI/CD piplines in Azure DevOps and Octopus
 
 ## Volunteer Experience
 
