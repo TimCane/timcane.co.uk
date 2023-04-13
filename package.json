@@ -4,8 +4,12 @@
   "description": "",
   "main": "",
   "scripts": {
-    "serve": "npx @11ty/eleventy --serve",
-    "build": "npx @11ty/eleventy"
+    "serve:eleventy": "npx @11ty/eleventy --serve",
+    "serve:sass": "npx sass src/site/_scss:dist/assets/css --watch",
+    "serve": "concurrently 'npm:serve:eleventy' 'npm:serve:sass'",
+    "build:eleventy": "npx @11ty/eleventy",
+    "build:sass": "npx sass src/site/_scss:dist/assets/css --style=compressed --no-source-map",
+    "build": "npm run build:eleventy && npm run build:sass"
   },
   "repository": {
     "type": "git",
@@ -19,9 +23,10 @@
   },
   "homepage": "https://github.com/TimCane/timcane.co.uk#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
-    "eleventy-plugin-sass": "^1.2.0"
+    "@11ty/eleventy": "^1.0.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.2.2",
+    "concurrently": "^7.6.0",
+    "sass": "^1.57.1"
   },
   "dependencies": {
     "html-pdf": "^3.0.1"
