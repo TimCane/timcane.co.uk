@@ -19,8 +19,11 @@ C#, .Net Framework / Core / Standard, Azure, Entity Framework, TSQL, ASP.NET, Te
 
 ## Work Experience
 
+### **Senior Developer**, CloudAttribution
+**{% duration '12/2021' 'present' %}**
+
 ### **Senior Full-Stack Developer**, Silverbear
-**{% duration '09/2013' 'present' %}**
+**{% duration '09/2013' '11/2021' %}**
 
 **Prior Roles:** Full-Stack Developer, Junior Full-Stack Developer, Apprentice Full-Stack Developer.
 
