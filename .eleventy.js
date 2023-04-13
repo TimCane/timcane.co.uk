@@ -1,4 +1,3 @@
-const pluginSass = require("eleventy-plugin-sass");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 const durationShortcode = require("./src/code/shortcodes/duration.shortcode");
@@ -12,11 +11,9 @@ module.exports = function (config) {
     config.addShortcode("duration", durationShortcode);
 
     //Register the SASS plugin.
-    config.addPlugin(pluginSass, {
-        watch: ["**/theme.scss", "**/layouts/*.scss"],
-        outputDir: "dist/assets/css/",
-        remap: true
-    });
+	config.setBrowserSyncConfig({
+		files: './dist/assets/css/*.css'
+	});
 
     config.addTransform('cv-to-pdf', cvToPDF);
 
