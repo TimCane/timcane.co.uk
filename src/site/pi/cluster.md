@@ -1,3 +1,6 @@
+---
+title: PI Cluster
+---
 ## Hardware
 
 | **Hostname** | **Role** | **IP Address**               | **MAC Address**   | **Serial Number** | **Boot Mode** | **HAT**                                                                                                               |
