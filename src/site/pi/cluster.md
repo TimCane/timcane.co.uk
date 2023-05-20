@@ -9,9 +9,9 @@ title: PI Cluster
 | **Hostname**                         | **IP Address**               | **MAC Address**   | **Serial Number** | **Boot Mode** | **HAT**                                                                                           |
 | ------------------------------------ | ---------------------------- | ----------------- | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
 | pi-grey</br><small>HEAD</small>      | 192.168.0.3</br>192.168.50.1 | DC:A6:32:7D:8B:2A | e7a04c41          | USB           | [USB & Ethernet](https://thepihut.com/products/usb-3-2-hub-gigabit-ethernet-hat-for-raspberry-pi) |
-| pi-orange</br><small>CLUSTER</small> | 192.168.50.11                | DC:A6:32:31:39:61 | 60c90130          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
 | pi-red</br><small>CLUSTER</small>    | 192.168.50.12                | E4:5F:01:63:8C:02 | 1862a49b          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
-| pi-yellow</br><small>CLUSTER</small> | 192.168.50.13                | DC:A6:32:XC:7A:D1 | r9d6lh8n          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
+| pi-orange</br><small>CLUSTER</small> | 192.168.50.11                | DC:A6:32:31:39:61 | 60c90130          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
+| pi-yellow</br><small>CLUSTER</small> | 192.168.50.13                | DC:A6:32:28:C5:F3 | r9d6lh8n          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
 
 ## Head Node
 
@@ -109,7 +109,7 @@ group {
 
         host pi-yellow {
             option root-path "/network-boot/tftp/";
-            hardware ethernet DC:A6:32:XC:7A:D1;
+            hardware ethernet DC:A6:32:28:C5:F3;
             option option-43 "Raspberry Pi Boot";
             option option-66 "192.168.50.1";
             next-server 192.168.50.1;
