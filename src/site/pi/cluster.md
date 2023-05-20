@@ -2,14 +2,16 @@
 title: PI Cluster
 ---
 
+# Pi Cluster
+
 ## Hardware
 
-| **Hostname** | **Role** | **IP Address**               | **MAC Address**   | **Serial Number** | **Boot Mode** | **HAT**                                                                                                               |
-| ------------ | -------- | ---------------------------- | ----------------- | ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------- |
-| pi-grey      | HEAD     | 192.168.0.3</br>192.168.50.1 | DC:A6:32:7D:8B:2A | e7a04c41          | USB           | [USB 3.2 Hub & Gigabit Ethernet HAT](https://thepihut.com/products/usb-3-2-hub-gigabit-ethernet-hat-for-raspberry-pi) |
-| pi-orange    | CLUSTER  | 192.168.50.11                | DC:A6:32:31:39:61 | 60c90130          | NET           | [Raspberry Pi PoE+ HAT](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                      |
-| pi-red       | CLUSTER  | 192.168.50.12                | E4:5F:01:63:8C:02 | 1862a49b          | NET           | [Raspberry Pi PoE+ HAT](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                      |
-| pi-yellow    | CLUSTER  | 192.168.50.13                | XX:XX:XX:XX:XX:XX | XXXXXXXX          | NET           | [Raspberry Pi PoE+ HAT](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                      |
+| **Hostname**                         | **IP Address**               | **MAC Address**   | **Serial Number** | **Boot Mode** | **HAT**                                                                                           |
+| ------------------------------------ | ---------------------------- | ----------------- | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| pi-grey</br><small>HEAD</small>      | 192.168.0.3</br>192.168.50.1 | DC:A6:32:7D:8B:2A | e7a04c41          | USB           | [USB & Ethernet](https://thepihut.com/products/usb-3-2-hub-gigabit-ethernet-hat-for-raspberry-pi) |
+| pi-orange</br><small>CLUSTER</small> | 192.168.50.11                | DC:A6:32:31:39:61 | 60c90130          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
+| pi-red</br><small>CLUSTER</small>    | 192.168.50.12                | E4:5F:01:63:8C:02 | 1862a49b          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
+| pi-yellow</br><small>CLUSTER</small> | 192.168.50.13                | DC:A6:32:XC:7A:D1 | r9d6lh8n          | NET           | [PoE+](https://thepihut.com/products/raspberry-pi-poe-plus-hat)                                   |
 
 ## Head Node
 
@@ -107,7 +109,7 @@ group {
 
         host pi-yellow {
             option root-path "/network-boot/tftp/";
-            hardware ethernet XX:XX:XX:XX:XX:XX;
+            hardware ethernet DC:A6:32:XC:7A:D1;
             option option-43 "Raspberry Pi Boot";
             option option-66 "192.168.50.1";
             next-server 192.168.50.1;
@@ -295,7 +297,7 @@ root@pi-grey:/network-boot/image # nano /etc/fstab
 # /etc/fstab
 /network-boot/pi-orange/boot /network-boot/tftp/60c90130 none defaults,bind 0 0
 /network-boot/pi-red/boot /network-boot/tftp/1862a49b none defaults,bind 0 0
-/network-boot/pi-yellow/boot /network-boot/tftp/XXXXXXXX none defaults,bind 0 0
+/network-boot/pi-yellow/boot /network-boot/tftp/r9d6lh8n none defaults,bind 0 0
 ```
 
 ```shellsession
@@ -388,7 +390,7 @@ root@pi-grey:~ # mkdir -p /network-boot/pi-yellow
 root@pi-grey:~ # cp -a /network-boot/pi-orange/* /network-boot/pi-red
 root@pi-grey:~ # cp -a /network-boot/pi-orange/* /network-boot/pi-yellow
 root@pi-grey:~ # mkdir -p /network-boot/tftp/1862a49b
-root@pi-grey:~ # mkdir -p /network-boot/tftp/XXXXXXXX
+root@pi-grey:~ # mkdir -p /network-boot/tftp/r9d6lh8n
 root@pi-grey:~ # exit
 ```
 
