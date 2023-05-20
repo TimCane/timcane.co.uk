@@ -1,6 +1,7 @@
 ---
 title: PI Cluster
 ---
+
 ## Hardware
 
 | **Hostname** | **Role** | **IP Address**               | **MAC Address**   | **Serial Number** | **Boot Mode** | **HAT**                                                                                                               |
@@ -14,7 +15,7 @@ title: PI Cluster
 
 ### Setting up eth interfaces
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo nano /etc/network/interfaces.d/eth1
 ```
 
@@ -28,7 +29,7 @@ iface eth1 inet static
     gateway 192.168.0.1
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo nano /etc/network/interfaces.d/eth0
 ```
 
@@ -43,7 +44,7 @@ iface eth0 inet static
     broadcast 192.168.50.255
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo shutdown -h now
 ```
 
@@ -51,7 +52,7 @@ Plug `router` into `eth1` & `switch` into `eth0`.
 
 ### Setting up DHCP Server
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo apt install isc-dhcp-server
 tim@pi-grey:~ $ sudo nano /etc/dhcp/dhcpd.conf
 ```
@@ -118,7 +119,7 @@ group {
 }
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo nano /etc/default/isc-dhcp-server
 ```
 
@@ -129,7 +130,7 @@ DHCPDv4_PID=/var/run/dhcpd.pid
 INTERFACESv4="eth0"
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo nano /etc/hosts
 ```
 
@@ -148,13 +149,13 @@ ff02::2         ip6-allrouters
 192.168.50.13	pi-yellow
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo reboot
 ```
 
 ### Allowing access to the disk over the network
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo apt install nfs-kernel-server
 tim@pi-grey:~ $ sudo mkdir /network-share
 tim@pi-grey:~ $ sudo chown tim:tim /network-share
@@ -169,7 +170,7 @@ tim@pi-grey:~ $ sudo nano /etc/exports
 /network-boot/pi-yellow 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo systemctl enable rpcbind.service
 tim@pi-grey:~ $ sudo systemctl start rpcbind.service
 tim@pi-grey:~ $ sudo systemctl enable nfs-server.service
@@ -181,7 +182,7 @@ tim@pi-grey:~ $ sudo reboot
 
 #### tftp server
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo apt install tftpd-hpa
 tim@pi-grey:~ $ sudo apt install kpartx
 tim@pi-grey:~ $ sudo mkdir /network-boot
@@ -198,13 +199,13 @@ TFTP_ADDRESS=":69"
 TFTP_OPTIONS="--secure --create"
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo systemctl restart tftpd-hpa
 ```
 
 #### give compute nodes internet access
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo nano /etc/sysctl.conf
 ```
 
@@ -214,7 +215,7 @@ tim@pi-grey:~ $ sudo nano /etc/sysctl.conf
 net.ipv4.ip_forward=1
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo apt install iptables
 tim@pi-grey:~ $ sudo iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 tim@pi-grey:~ $ sudo iptables -A FORWARD -i eth1 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
@@ -229,17 +230,17 @@ tim@pi-grey:~ $ sudo nano /etc/rc.local
 iptables-restore < /etc/iptables.ipv4.nat
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo reboot
 ```
 
 #### boot image
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su
 ```
 
-```bash
+```shellsession
 root@pi-grey:~ # mkdir /network-boot/image
 root@pi-grey:~ # cd /network-boot/image
 root@pi-grey:/network-boot/image # wget -O raspios_lite_arm64.img.xz https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
@@ -255,7 +256,7 @@ root@pi-grey:/network-boot/image # cp -a rootmnt/* /network-boot/pi-orange
 root@pi-grey:/network-boot/image # cp -a bootmnt/* /network-boot/pi-orange/boot
 ```
 
-```bash
+```shellsession
 root@pi-grey:/network-boot/image # touch /network-boot/pi-orange/boot/ssh
 root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/boot/userconf
 ```
@@ -266,7 +267,7 @@ root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/boot/userconf
 tim:$6$Pp1bRRnPBm3wcbG.$LYUGp3j7olEbbIdPAD/1Btfg3QOIOVnUzjFTKag2Jb0p84zLCHBfD5kokmEUMCG6Fcyu4Y8oh3T94vzuj4ama0
 ```
 
-```bash
+```shellsession
 root@pi-grey:/network-boot/image # sed -i /UUID/d /network-boot/pi-orange/etc/fstab
 root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/etc/fstab
 ```
@@ -277,7 +278,7 @@ root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/etc/fstab
 192.168.50.1:/network-share /network-share nfs defaults 0 0
 ```
 
-```bash
+```shellsession
 root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/boot/cmdline.txt
 ```
 
@@ -286,7 +287,7 @@ root@pi-grey:/network-boot/image # nano /network-boot/pi-orange/boot/cmdline.txt
 console=serial0,115200 console=tty root=/dev/nfs nfsroot=192.168.50.1:/network-boot/pi-orange,vers=4.1,proto=tcp rw ip=dhcp rootwait
 ```
 
-```bash
+```shellsession
 root@pi-grey:/network-boot/image # nano /etc/fstab
 ```
 
@@ -297,7 +298,7 @@ root@pi-grey:/network-boot/image # nano /etc/fstab
 /network-boot/pi-yellow/boot /network-boot/tftp/XXXXXXXX none defaults,bind 0 0
 ```
 
-```bash
+```shellsession
 root@pi-grey:/network-boot/image # systemctl restart rpcbind
 root@pi-grey:/network-boot/image # systemctl restart nfs-server
 root@pi-grey:/network-boot/image # umount bootmnt/
@@ -313,7 +314,7 @@ tim@pi-grey:/network-boot/image $ sudo reboot
 
 #### setup
 
-```bash
+```shellsession
 tim@pi-orange:~ $ sudo systemctl disable resize2fs_once.service
 tim@pi-orange:~ $ sudo apt remove dphys-swapfile
 tim@pi-orange:~ $ sudo nano /etc/hosts
@@ -334,7 +335,7 @@ ff02::2         ip6-allrouters
 192.168.50.13	pi-yellow
 ```
 
-```bash
+```shellsession
 tim@pi-orange:~ $ sudo nano /etc/hostname
 ```
 
@@ -343,14 +344,14 @@ tim@pi-orange:~ $ sudo nano /etc/hostname
 pi-orange
 ```
 
-```bash
+```shellsession
 tim@pi-orange:~ $ sudo mkdir /network-share
 tim@pi-orange:~ $ sudo chown tim:tim /network-share
 ```
 
 #### enable passwordless login
 
-```bash
+```shellsession
 tim@pi-orange:~ $ sudo nano /etc/ssh/sshd_config
 ```
 
@@ -363,24 +364,24 @@ PasswordAuthentication yes
 PermitEmptyPasswords no
 ```
 
-```bash
+```shellsession
 tim@pi-orange:~ $ sudo systemctl restart ssh
 tim@pi-orange:~ $ sudo shutdown -h now
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo ssh-keygen -t rsa -b 4096 -C "tim@pi-grey"
 ```
 
 _use blank password_
 
-```bash
+```shellsession
 tim@pi-grey:~ $ ssh-copy-id -i /home/pi/.ssh/id_rsa.pub tim@pi-orange
 ```
 
 ### Add remaining compute nodes
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su
 root@pi-grey:~ # mkdir -p /network-boot/pi-red
 root@pi-grey:~ # mkdir -p /network-boot/pi-yellow
@@ -391,7 +392,7 @@ root@pi-grey:~ # mkdir -p /network-boot/tftp/XXXXXXXX
 root@pi-grey:~ # exit
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/boot/cmdline.txt
 ```
 
@@ -400,7 +401,7 @@ tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/boot/cmdline.txt
 console=serial0,115200 console=tty root=/dev/nfs nfsroot=192.168.50.1:/network-boot/pi-red,vers=4.1,proto=tcp rw ip=dhcp rootwait
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/etc/hostname
 ```
 
@@ -409,7 +410,7 @@ tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/etc/hostname
 pi-red
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/etc/hosts
 ```
 
@@ -428,7 +429,7 @@ ff02::2         ip6-allrouters
 192.168.50.13	pi-yellow
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-yellow/boot/cmdline.txt
 ```
 
@@ -437,7 +438,7 @@ tim@pi-grey:~ $ sudo su nano /network-boot/pi-yellow/boot/cmdline.txt
 console=serial0,115200 console=tty root=/dev/nfs nfsroot=192.168.50.1:/network-boot/pi-yellow,vers=4.1,proto=tcp rw ip=dhcp rootwait
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-yellow/etc/hostname
 ```
 
@@ -446,7 +447,7 @@ tim@pi-grey:~ $ sudo su nano /network-boot/pi-yellow/etc/hostname
 pi-yellow
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo su nano /network-boot/pi-red/etc/hosts
 ```
 
@@ -465,6 +466,6 @@ ff02::2         ip6-allrouters
 192.168.50.13	pi-yellow
 ```
 
-```bash
+```shellsession
 tim@pi-grey:~ $ sudo reboot
 ```
