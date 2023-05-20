@@ -2,17 +2,17 @@ html {
   scrollbar-color: $scrollbar-thumb $background-body;
   scrollbar-width: thin;
 
-  font-size: 62.5%; 
+  font-size: 62.5%;
 }
 
 body {
-
   font-size: 1.5rem; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
 
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  
-  max-width: 80rem;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+
+  max-width: 90rem;
   margin: 2rem auto;
   padding: 0 1rem;
   word-wrap: break-word;
@@ -24,10 +24,7 @@ body {
 button,
 input,
 textarea {
-  transition:
-    background-color $animation-duration linear,
-    border-color $animation-duration linear,
-    color $animation-duration linear,
-    box-shadow $animation-duration linear,
-    transform $animation-duration ease;
+  transition: background-color $animation-duration linear,
+    border-color $animation-duration linear, color $animation-duration linear,
+    box-shadow $animation-duration linear, transform $animation-duration ease;
 }
