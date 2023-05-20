@@ -168,8 +168,6 @@ tim@pi-grey:~ $ sudo nano /etc/exports
 #/etc/exports
 /network-share 192.168.50.0/24(rw,sync)
 /network-boot/pi-orange 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
-/network-boot/pi-red 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
-/network-boot/pi-yellow 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
 ```
 
 ```shellsession
@@ -296,8 +294,6 @@ root@pi-grey:/network-boot/image # nano /etc/fstab
 ```ini
 # /etc/fstab
 /network-boot/pi-orange/boot /network-boot/tftp/60c90130 none defaults,bind 0 0
-/network-boot/pi-red/boot /network-boot/tftp/1862a49b none defaults,bind 0 0
-/network-boot/pi-yellow/boot /network-boot/tftp/r9d6lh8n none defaults,bind 0 0
 ```
 
 ```shellsession
@@ -466,6 +462,28 @@ ff02::2         ip6-allrouters
 192.168.50.11	pi-orange
 192.168.50.12	pi-red
 192.168.50.13	pi-yellow
+```
+
+```shellsession
+root@pi-grey:/network-boot/image # nano /etc/fstab
+```
+
+```ini
+# /etc/fstab
+# ADD TO BOTTOM OF FILE
+/network-boot/pi-red/boot /network-boot/tftp/1862a49b none defaults,bind 0 0
+/network-boot/pi-yellow/boot /network-boot/tftp/r9d6lh8n none defaults,bind 0 0
+```
+
+```shellsession
+tim@pi-grey:~ $ sudo nano /etc/exports
+```
+
+```ini
+#/etc/exports
+# ADD TO BOTTOM OF FILE
+/network-boot/pi-red 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
+/network-boot/pi-yellow 192.168.50.0/24(rw,sync,no_subtree_check,no_root_squash)
 ```
 
 ```shellsession
