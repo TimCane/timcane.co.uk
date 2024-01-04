@@ -1,0 +1,36 @@
+---
+layout: page
+cssfile: page.css
+---
+
+<h1>Route {{ title }}</h1>
+
+{% for type in types %}
+<div>
+  {{ type }}
+</div>
+{% endfor %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Climb</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for climb in climbs %}
+    <tr>
+      <td>{{ climb.colour }}</td>
+      <td>{{ climb.grade }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">
+        Set by {{set.setter}} on {{set.date}}.
+      </td>
+    </tr>
+  </tfoot>
+</table>
