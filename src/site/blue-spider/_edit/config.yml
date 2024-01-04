@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: TimCane/timcane.co.uk
+  branch: blue-spider
+media_folder: "src/public/media/blue-spider"
+public_folder: "/assets/media/blue-spider"
+collections:
+  - name: "routes"
+    label: "Routes"
+    label_singular: "Route"
+    folder: "src/site/blue-spider/routes"
+    create: true
+    fields:
+      - label: "Route #"
+        name: "title"
+        widget: "number"
+
+      - label: "types"
+        name: "types"
+        create: true
+        multiple: true
+        options: ["Auto-Belay", "Lead", "Top rope"]
+        widget: select
+
+      - label: "Set"
+        name: "set"
+        summary: "{{fields.setter}} {{fields.date}}"
+        widget: "object"
+        fields:
+          - label: "Setter"
+            name: "setter"
+            required: false
+            widget: "string"
+          - label: "Date"
+            name: "date"
+            date_format: "DD/MM/YYYY"
+            format: "DD/MM/YYYY"
+            required: false
+            time_format: false
+            widget: "datetime"
+
+      - label: "Climbs"
+        name: "climbs"
+        summary: "{{fields.colour}} - {{fields.grade}}"
+        widget: "list"
+        required: false
+        fields:
+          - label: Colour
+            name: colour
+            widget: string
+          - label: Grade
+            name: grade
+            widget: string

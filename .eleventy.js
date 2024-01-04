@@ -4,27 +4,29 @@ const durationShortcode = require("./src/code/shortcodes/duration.shortcode");
 const cvToPDF = require("./src/code/transforms/cv-to-pdf.transform");
 
 module.exports = function (config) {
+  // Copy my public folder to the output.
+  config.addPassthroughCopy({
+    "src/public/": "./",
+    "src/site/blue-spider/_edit/config.yml": "./blue-spider/_edit/config.yml",
+  });
 
-    // Copy my public folder to the output.
-    config.addPassthroughCopy({ "src/public/": "./" });
+  config.addShortcode("duration", durationShortcode);
 
-    config.addShortcode("duration", durationShortcode);
+  //Register the SASS plugin.
+  config.setBrowserSyncConfig({
+    files: "./dist/assets/css/*.css",
+  });
 
-    //Register the SASS plugin.
-	config.setBrowserSyncConfig({
-		files: './dist/assets/css/*.css'
-	});
+  config.addTransform("cv-to-pdf", cvToPDF);
 
-    config.addTransform('cv-to-pdf', cvToPDF);
+  //Register the syntax highlight plugin
+  config.addPlugin(syntaxHighlight);
 
-    //Register the syntax highlight plugin
-    config.addPlugin(syntaxHighlight);
-
-    return {
-        dir: {
-            input: "src/site",
-            output: "dist",
-            layouts: "_layouts/"
-        }
-    };
+  return {
+    dir: {
+      input: "src/site",
+      output: "dist",
+      layouts: "_layouts/",
+    },
+  };
 };
