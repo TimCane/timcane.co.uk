@@ -1,0 +1,150 @@
+button,
+select,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="checkbox"],
+input[type="range"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select {
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  color: #171717;
+  background-color: #efefef;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1rem;
+  border: none;
+  outline: none;
+}
+
+input[type="color"] {
+  min-height: 2rem;
+  padding: 0.8rem;
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  height: 1em;
+  width: 1em;
+}
+
+input[type="radio"] {
+  border-radius: 100%;
+}
+
+input {
+  vertical-align: top;
+}
+
+label {
+  vertical-align: middle;
+  padding: 0.4rem;
+  display: inline-block;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+input[type="range"],
+select,
+button,
+textarea {
+  -webkit-appearance: none;
+}
+
+textarea {
+  display: block;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+textarea:not([cols]) {
+  width: 100%;
+}
+
+textarea:not([rows]) {
+  min-height: 4rem;
+  height: 14rem;
+}
+
+select {
+  background: #efefef
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='62.5' width='116.9'%3E%3Cpath d='M115.3 1.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1L7.4 1.6C5.8 0 3.2 0 1.6 1.6 0 3.2 0 5.8 1.6 7.4l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z'/%3E%3C/svg%3E")
+    calc(100% - 1.2rem) 50% / 1.2rem no-repeat;
+  padding-right: 3.5rem;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select[multiple] {
+  padding-right: 1rem;
+  background-image: none;
+  overflow-y: auto;
+}
+
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  color: #171717;
+  background-color: #efefef;
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  background: #ddd;
+}
+
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgba(254,127,45,.65);
+}
+
+input[type="checkbox"]:active,
+input[type="radio"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+input[type="range"]:active,
+button:active {
+  transform: translateY(0.2rem);
+}
+
+input:disabled,
+select:disabled,
+button:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+::placeholder {
+  color: #949494;
+}
+
+fieldset {
+  border: 0.1rem rgba(254,127,45,.65) solid;
+  padding: 1rem;
+}
+
+legend {
+  font-size: 0.9rem;
+  font-weight: 600;
+}

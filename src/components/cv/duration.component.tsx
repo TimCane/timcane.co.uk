@@ -20,7 +20,7 @@ const months: string[] = [
   "December",
 ];
 
-export class Duration extends React.Component {
+export class Duration extends React.Component<Props> {
   start: string;
   end: string;
 
@@ -55,9 +55,9 @@ export class Duration extends React.Component {
 
   render() {
     return (
-      <div>
+      <span>
         {this.getValue(this.start)} - {this.getValue(this.end)}
-      </div>
+      </span>
     );
   }
 }
