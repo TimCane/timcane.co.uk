@@ -1,0 +1,16 @@
+code {
+  background: #efefef;
+  color: #171717;
+  padding: 0.25rem 0.5rem;
+  font-size: 1em;
+}
+
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+  background: #c1def1;
+}
+
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: #c1def1;
+}

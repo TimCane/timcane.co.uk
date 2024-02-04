@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "@fontsource-variable/montserrat";
+
+
+@import "./app/styles/variables";
+
+
+@import "./app/styles/base";
+@import "./app/styles/code";
+@import "./app/styles/forms";
+@import "./app/styles/links";
+@import "./app/styles/misc";
+@import "./app/styles/print";
+@import "./app/styles/range";
+@import "./app/styles/typography";

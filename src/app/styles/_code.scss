@@ -1,0 +1,22 @@
+samp,
+time {
+  background: $background;
+  color: $black;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.6rem;
+  font-size: 1em;
+}
+
+var {
+  color: $variable;
+  font-style: normal;
+  font-family: monospace;
+}
+
+kbd {
+  background: $background;
+  border: 0.1rem solid $border;
+  border-radius: 0.2rem;
+  color: $text-main;
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+}

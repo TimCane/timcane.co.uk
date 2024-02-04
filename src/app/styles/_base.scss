@@ -1,0 +1,24 @@
+html {
+  scrollbar-color: $scrollbar-thumb $background-body;
+  scrollbar-width: thin;
+
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem; /* currently ems cause chrome bug misinterpreting rems on body element */
+  line-height: 1.6;
+
+  word-wrap: break-word;
+  color: $text-main;
+  background: $background-body;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea {
+  transition: background-color $animation-duration linear,
+    border-color $animation-duration linear, color $animation-duration linear,
+    box-shadow $animation-duration linear, transform $animation-duration ease;
+}
