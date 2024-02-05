@@ -11,7 +11,6 @@ hr {
 
 table {
   border-collapse: collapse;
-  margin-bottom: 1rem;
   width: 100%;
   table-layout: fixed;
 }
@@ -78,7 +77,6 @@ details {
   align-items: flex-start;
   background-color: $background-alt;
   padding: 1rem 1rem 0;
-  margin: 1em 0;
   border-radius: 0.6rem;
   overflow: hidden;
 }
@@ -87,19 +85,10 @@ details[open] {
   padding: 1rem;
 }
 
-details > :last-child {
-  margin-bottom: 0;
-}
-
-details[open] summary {
-  margin-bottom: 1rem;
-}
-
 summary {
   display: list-item;
   background-color: $background;
   padding: 1rem;
-  margin: -1rem -1rem 0;
   cursor: pointer;
   outline: none;
 }
@@ -107,10 +96,6 @@ summary {
 summary:hover,
 summary:focus {
   text-decoration: underline;
-}
-
-details > :not(summary) {
-  margin-top: 0;
 }
 
 summary::-webkit-details-marker {
@@ -129,7 +114,6 @@ dialog {
 dialog > header:first-child {
   background-color: $background;
   border-radius: 0.6rem 0.6rem 0 0;
-  margin: -1rem -3rem 1rem;
   padding: 1rem;
   text-align: center;
 }
@@ -143,8 +127,4 @@ footer {
   border-top: 0.1rem solid $border;
   padding-top: 1rem;
   color: $text-muted;
-}
-
-body > footer {
-  margin-top: 4rem;
 }

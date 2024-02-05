@@ -1,0 +1,25 @@
+<div class="relative py-8 sm:py-4">
+  <div class="relative">
+    <div class="absolute -top-9 right-0 z-10 flex gap-2">
+      <button
+        [ngClass]="'py-2 px-4 ' + (isInteractive ? 'bg-[#ddd]' : '')"
+        (click)="onToggleInteractive()"
+      >
+        Edit
+      </button>
+      <button class="py-2 px-4" (click)="onCopyCode()">Copy</button>
+    </div>
+    <div>
+      <tc-code-block [code]="interactiveCode" [language]="language" />
+    </div>
+  </div>
+  <div *ngIf="isInteractive" class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <tc-text-box
+      *ngFor="let token of tokens"
+      [label]="token.label"
+      [key]="token.key"
+      [(value)]="token.value"
+      (valueChange)="onTokenChange(token.key)"
+    />
+  </div>
+</div>

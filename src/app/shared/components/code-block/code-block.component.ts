@@ -1,14 +1,18 @@
 import {
   Component,
   Input,
+  OnChanges,
   OnInit,
   SecurityContext,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import * as Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-shell-session';
+import 'prismjs/components/prism-typescript';
 
 @Component({
   selector: 'tc-code-block',
@@ -16,7 +20,7 @@ import 'prismjs/components/prism-shell-session';
   styleUrls: ['./code-block.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CodeBlockComponent implements OnInit {
+export class CodeBlockComponent implements OnInit, OnChanges {
   @Input({ required: true }) language: string = '';
   @Input({ required: true }) code: string[] = [];
 
@@ -24,7 +28,7 @@ export class CodeBlockComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  ngOnInit(): void {
+  generateHtml() {
     let html: string | null = '';
     let code = this.code.join('\n');
     let language = this.language;
@@ -36,5 +40,13 @@ export class CodeBlockComponent implements OnInit {
     if (html) {
       this.html = html;
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.generateHtml();
+  }
+
+  ngOnInit(): void {
+    this.generateHtml();
   }
 }

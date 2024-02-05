@@ -1,0 +1,12 @@
+<div class="flex items-center w-full">
+  <label class="pr-2 w-3/12 text-center" [htmlFor]="key + '-token'">
+    {{ label }}
+  </label>
+  <input
+    class="flex-grow"
+    id="key + '-token'"
+    type="text"
+    [formControl]="control"
+    (ngModelChange)="onChange($event)"
+  />
+</div>

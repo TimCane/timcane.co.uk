@@ -1,1 +1,94 @@
-<p>cli-commands works!</p>
+<h1>My common angular commands</h1>
+
+<div>
+  <h2>Adding a new root module</h2>
+  <div>
+    <p>1. Run the following command:</p>
+    <tc-interactive-code-block
+      language="bash"
+      [code]="[
+        'ng g module modules/[name] --module=app --routing=true --project=[project]'
+      ]"
+      [tokens]="[
+        { key: '[name]', label: 'Name' },
+        { key: '[project]', label: 'Project' }
+      ]"
+    />
+
+    <p>
+      2. Update <tc-code language="text" code="app-routing.module.ts" /> with a
+      new route
+    </p>
+    <tc-interactive-code-block
+      language="typescript"
+      [code]="[
+        '{',
+        '    path: \'[name]\',',
+        '    loadChildren: () => import(\'./[name]/[name].module\').then((m) => m.[Name]Module),',
+        '},'
+      ]"
+      [tokens]="[
+        { key: '[name]', label: 'Name (Path)' },
+        { key: '[Name]', label: 'Name (Module)' }
+      ]"
+    />
+  </div>
+</div>
+
+<div>
+  <h2>Adding a new feature to a module</h2>
+  <div>
+    <tc-interactive-code-block
+      language="bash"
+      [code]="[
+        'ng g module modules/[module]/features/[name] --module=[module] --routing=true --route=[name] --project=[project]'
+      ]"
+      [tokens]="[
+        { key: '[module]', label: 'Module' },
+        { key: '[name]', label: 'Name' },
+        { key: '[project]', label: 'Project' }
+      ]"
+    />
+  </div>
+</div>
+
+<div>
+  <h2>Adding a component</h2>
+  <div>
+    <div>
+      <h3>Smart component</h3>
+      <div>
+        <tc-interactive-code-block
+          language="bash"
+          [code]="[
+            'ng g module modules/[module]/features/[feature]/[feature]-[name] --project=[project]',
+            'ng g component modules/[module]/features/[feature]/[feature]-[name] --project=[project]'
+          ]"
+          [tokens]="[
+            { key: '[module]', label: 'Module' },
+            { key: '[feature]', label: 'Feature' },
+            { key: '[name]', label: 'Name' },
+            { key: '[project]', label: 'Project' }
+          ]"
+        />
+      </div>
+    </div>
+    <div>
+      <h3>Dumb component</h3>
+      <div>
+        <tc-interactive-code-block
+          language="bash"
+          [code]="[
+            'ng g module modules/[module]/components/[name] --project=[project]',
+            'ng g component modules/[module]/components/[name] --project=[project]'
+          ]"
+          [tokens]="[
+            { key: '[module]', label: 'Module' },
+            { key: '[name]', label: 'Name' },
+            { key: '[project]', label: 'Project' }
+          ]"
+        />
+      </div>
+    </div>
+  </div>
+</div>
