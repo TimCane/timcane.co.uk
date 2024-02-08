@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'tc-angular',
-  templateUrl: './angular.component.html',
-  styleUrls: ['./angular.component.scss']
+  template: ` <div tcContainer>
+    <router-outlet></router-outlet>
+  </div>`,
+  styles: [],
 })
-export class AngularComponent {
-
-}
+export class AngularComponent {}

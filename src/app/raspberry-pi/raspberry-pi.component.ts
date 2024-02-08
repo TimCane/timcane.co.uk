@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'tc-raspberry-pi',
-  templateUrl: './raspberry-pi.component.html',
-  styleUrls: ['./raspberry-pi.component.scss']
+  template: ` <div tcContainer>
+    <router-outlet></router-outlet>
+  </div>`,
+  styles: [``],
 })
-export class RaspberryPiComponent {
-
-}
+export class RaspberryPiComponent {}

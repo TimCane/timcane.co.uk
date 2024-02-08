@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'tc-root',
-  templateUrl: './root.component.html',
-  styleUrls: ['./root.component.scss']
+  template: `<router-outlet></router-outlet>`,
+  styles: [``],
 })
-export class RootComponent {
-
-}
+export class RootComponent {}
