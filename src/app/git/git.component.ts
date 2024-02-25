@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'tc-angular',
+  selector: 'tc-git',
   template: ` <div tcContainer>
     <tc-page-header />
     <router-outlet></router-outlet>
   </div>`,
   styles: [],
 })
-export class AngularComponent {}
+export class GitComponent {}

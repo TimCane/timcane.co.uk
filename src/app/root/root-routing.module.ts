@@ -11,11 +11,14 @@ const routes: Routes = [
         path: 'cv',
         loadChildren: () =>
           import('./features/cv/cv.module').then((m) => m.CVModule),
+        data: {
+          title: 'CV',
+        },
       },
       {
         path: '',
         loadChildren: () =>
-          import('./features/home/home.module').then((m) => m.HomeModule),
+          import('./features/index/index.module').then((m) => m.IndexModule),
       },
     ],
   },

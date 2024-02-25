@@ -7,7 +7,8 @@
     <tc-interactive-code-block
       language="bash"
       [code]="[
-        'ng g module modules/[name] --module=app --routing=true --project=[project]'
+        'ng g module modules/[name] --module=app --routing=true --project=[project]',
+        'ng g component modules/[name] --module=app --project=[project]'
       ]"
       [tokens]="[
         { key: '[name]', label: 'Name' },

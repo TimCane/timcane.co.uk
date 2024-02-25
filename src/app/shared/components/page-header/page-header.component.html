@@ -1,0 +1,28 @@
+<div class="flex flex-col justify-center items-center">
+    <h1>Tim <span>Cane</span></h1>
+    <ul class="flex gap-2">
+      <li>
+        <a [routerLink]="['/']" routerLinkActive="router-link-active"> Home </a>
+      </li>
+      <li>
+        <a [routerLink]="['/', 'angular']" routerLinkActive="router-link-active">
+          Angular
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/', 'git']" routerLinkActive="router-link-active">Git</a>
+      </li>
+      <li>
+        <a
+          [routerLink]="['/', 'raspberry-pi']"
+          routerLinkActive="router-link-active"
+        >
+          Raspberry Pi
+        </a>
+      </li>
+    </ul>    
+</div>
+<div class="py-4">
+    <hr>
+</div>
+

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'tc-raspberry-pi',
   template: ` <div tcContainer>
+    <tc-page-header />
     <router-outlet></router-outlet>
   </div>`,
   styles: [``],

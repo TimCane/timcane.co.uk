@@ -1,0 +1,18 @@
+<h1>My common git commands</h1>
+
+<div>
+  <h2>Cleaning up local git branches</h2>
+  <div>
+    <tc-interactive-code-block
+      language="shell"
+      [code]="[
+        'git branch --no-merged | egrep -v &quot;(^\*|master|develop)&quot; | xargs git branch -d -D',
+        'git fetch origin --prune'
+      ]"
+      [tokens]="[
+        { key: 'master', label: 'Prod Branch', value: 'master' },
+        { key: 'develop', label: 'Dev Branch', value: 'develop' }
+      ]"
+    />
+  </div>
+</div>
