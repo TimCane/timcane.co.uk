@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/base.layout.astro";
+---
+
+<style>
+  ul {
+    list-style-type: none;
+  }
+</style>
+
+<BaseLayout title="">
+  <div class="h-screen flex flex-col items-center justify-center">
+    <div class="text-center pb-8">
+      <h1 class="m-0 text-5xl font-light uppercase tracking-widest">
+        <span>Tim</span>
+        <span class="font-base text-[#FE7F2D]">Cane</span>
+      </h1>
+      <div class="text-sm tracking-widest">Senior Developer</div>
+    </div>
+    <div class="links">
+      <ul class="flex flex-wrap gap-8 p-0 justify-center">
+        <li>
+          <a href="/cv/">CV</a>
+        </li>
+        <li>
+          <a href="https://github.com/timcane">Github</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
