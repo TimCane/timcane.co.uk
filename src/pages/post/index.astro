@@ -1,9 +1,23 @@
 ---
 import PageLayout from '../../layouts/page.layout.astro';
+import { getCollection } from 'astro:content';
+
+
+
+const postEntries = await getCollection('post');
 ---
 
 <PageLayout title='News'>
 
-THIS IS THE NEWS!
+    <ul>
+        {postEntries.map(blogPostEntry => (
+          <li>
+            <a href={`/post/${blogPostEntry.slug}`}>{blogPostEntry.data.title}</a>
+            <time datetime={blogPostEntry.data.date.toISOString()}>
+              {blogPostEntry.data.date.toDateString()}
+            </time>
+          </li>
+        ))}
+      </ul>
 
 </PageLayout>
