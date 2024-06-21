@@ -21,8 +21,8 @@ const months: string[] = [
 ];
 
 export class Duration extends React.Component<Props> {
-  start: string;
-  end: string;
+  start?: string;
+  end?: string;
 
   constructor(props: Props) {
     super(props);
@@ -55,6 +55,7 @@ export class Duration extends React.Component<Props> {
 
   render() {
     return (
+      this.props.start && this.props.end && 
       <span>
         {this.getValue(this.start)} - {this.getValue(this.end)}
       </span>

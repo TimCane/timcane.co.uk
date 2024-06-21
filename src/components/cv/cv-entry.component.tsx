@@ -4,8 +4,8 @@ import { Duration } from "./duration.component";
 interface Props {
   title: string;
   company: string;
-  start: string;
-  end: string;
+  start?: string;
+  end?: string;
   priorRoles: string[];
   children: React.ReactNode;
 }
