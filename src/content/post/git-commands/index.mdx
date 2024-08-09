@@ -1,0 +1,30 @@
+---
+title: Git Commands
+date: 2024-06-25T19:35:00.000Z
+tags:
+  - Git
+---
+
+import { InteractiveCode } from "../../../components/post/interactive-angular-code.component";
+
+# My common git commands
+
+## Removing old local branches
+
+<InteractiveCode
+  client:load
+  lang="bash"
+  code='git branch --no-merged | egrep -v "(^\*|[main]|[develop])" | xargs git branch -d -D'
+  tokens={[
+        { key: "[main]", label: "Main", value: "main" },
+            { key: "[develop]", label: "Develop", value: "develop" },
+  ]}
+/>
+
+<InteractiveCode
+  client:load
+  lang="bash"
+  code='git fetch origin --prune'
+  tokens={[
+  ]}
+/>
