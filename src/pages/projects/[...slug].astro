@@ -1,9 +1,10 @@
 ---
+export const prerender = true;
 import PageLayout from "@/layouts/portfolio-page.layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-    const projectsCollection: CollectionEntry<"project">[] = 
+    const projectsCollection: CollectionEntry<"project">[] =
         await getCollection("project");
     return projectsCollection.map((item) => ({
         params: { slug: item.slug },
@@ -22,22 +23,32 @@ const { Content } = await project.render();
     <article class="project-content">
         <div class="back-link-container">
             <a href="/projects" class="back-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="1.25rem" height="1.25rem">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="1.25rem"
+                    height="1.25rem"
+                >
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
                 </svg>
                 Back to Projects
             </a>
         </div>
 
-        {tags && tags.length > 0 && (
-            <div class="project-tags">
-                {tags.map((tag) => (
-                    <span class="project-tag">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-        )}
+        {
+            tags && tags.length > 0 && (
+                <div class="project-tags">
+                    {tags.map((tag) => (
+                        <span class="project-tag">{tag}</span>
+                    ))}
+                </div>
+            )
+        }
 
         <Content />
     </article>
@@ -105,7 +116,8 @@ const { Content } = await project.render();
         margin: var(--spacing-md) 0;
     }
 
-    .project-content :global(ul), .project-content :global(ol) {
+    .project-content :global(ul),
+    .project-content :global(ol) {
         color: var(--secondary);
         line-height: 1.75;
         margin: var(--spacing-md) 0;

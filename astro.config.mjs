@@ -15,7 +15,7 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone'
   }),
-  
+
   markdown: {
     syntaxHighlight: false
   }
