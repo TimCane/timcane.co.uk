@@ -1,0 +1,115 @@
+---
+import PortfolioPageLayout from "@/layouts/portfolio-page.layout.astro";
+import { getCollection } from "astro:content";
+
+interface Props {
+    title: string;
+    description: string;
+    errorCode: string;
+    errorMessage: string;
+}
+
+const { title, description, errorCode, errorMessage } = Astro.props;
+
+const allProjects = (await getCollection("project")).map((project) => ({
+    path: `/projects/${project.slug}`,
+    title: project.data.title,
+    type: "project"
+}));
+
+const allPosts = (await getCollection("post")).map((post) => ({
+    path: `/posts/${post.slug}`,
+    title: post.data.title,
+    type: "post"
+}));
+
+const allPages = [...allProjects, ...allPosts];
+
+const randomPage = allPages[Math.floor(Math.random() * allPages.length)];
+---
+
+<PortfolioPageLayout title={title} description={description}>
+    <div class="error-container">
+        <h1>{errorCode}</h1>
+        <p>{errorMessage}</p>
+        <p class="description"><slot /></p>
+        <div class="actions">
+            <a href="/" class="home-link">Go to Homepage</a>
+            <p class="description random-suggestion">
+                Or 
+                { randomPage.type === "project" && (" check out ")}
+                { randomPage.type === "post" && (" read this ")}
+                {randomPage.type}:
+                <a href={randomPage.path} class="random-link">{randomPage.title}</a>
+            </p>
+        </div>
+    </div>
+</PortfolioPageLayout>
+
+<style>
+    .error-container {
+        text-align: center;
+        margin: var(--spacing-xxl) var(--spacing-md);
+        padding: var(--spacing-xxl) var(--spacing-md);
+    }
+
+    h1 {
+        font-size: 6rem;
+        margin: 0;
+        color: var(--color-primary);
+    }
+
+    p {
+        font-size: 1.5rem;
+        margin: var(--spacing-md) 0;
+    }
+
+    .description {
+        color: var(--color-text-muted);
+        font-size: 1.125rem;
+        margin: var(--spacing-lg) 0;
+    }
+
+    .home-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        margin-top: var(--spacing-xl);
+        padding: var(--spacing-sm) var(--spacing-md);
+        color: var(--secondary);
+        text-decoration: none;
+        border-radius: var(--border-radius);
+        font-weight: var(--font-weight-bold);
+        transition: all 0.2s ease;
+        background-color: var(--primary-bg);
+        border: 1px solid var(--secondary-light);
+    }
+
+    .home-link:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-1px);
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+
+    .random-suggestion {
+        margin-top: var(--spacing-lg);
+    }
+
+    .random-link {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: var(--font-weight-bold);
+        transition: color 0.2s ease;
+    }
+
+    .random-link:hover {
+        color: var(--primary);
+    }
+</style>
