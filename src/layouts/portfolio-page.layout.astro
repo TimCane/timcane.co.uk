@@ -1,0 +1,43 @@
+---
+import PortfolioLayout from "@/layouts/portfolio.layout.astro";
+import Nav from "@/components/portfolio/nav.astro";
+import Footer from "@/components/portfolio/footer.astro";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<PortfolioLayout title={title} description={description}>
+    <div class="page">
+        <Nav currentPath={currentPath} />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </div>
+</PortfolioLayout>
+
+<style>
+    main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--spacing-md);
+    }
+
+    @media all and (min-width: 1024px) {
+        body {
+            max-width: 920px;
+        }
+    }
+
+    @media all and (min-width: 1200px) {
+        body {
+            max-width: 1080px;
+        }
+    }
+</style>
