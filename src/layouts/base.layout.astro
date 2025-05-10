@@ -1,15 +1,50 @@
 ---
-import BaseHead from "../components/base-head.component.astro";
+import "@/styles/preflight.css";
+import '@fontsource-variable/montserrat';
+import { ClientRouter } from "astro:transitions";
 
-const { title } = Astro.props;
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const canonicalURL = Astro.url.href;
 ---
 
 <!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={title} />
-  </head>
-  <body>
-    <slot />
-  </body>
+<html transition:name="root" lang="en" data-theme="light">
+    <head>
+    <ClientRouter />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Primary Meta Tags -->
+        <title>{title} | Tim Cane</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+        <!-- Other important meta tags -->
+        <meta name="robots" content="index, follow" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- Prevent FOUC (flash of unstyled content) -->
+        <script is:inline>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+    </head>
+    <body>
+        <slot />
+    </body>
 </html>
