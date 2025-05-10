@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import LoadingSplash from "./components/common/loading-splash";
 import { WizardProvider } from "./components/wizard/context/wizard-context";
-import GameSetupWizard from "./components/wizard/GameSetupWizard";
+import GameSetupWizard from "./components/wizard/game-setup-wizard";
 import type { GameSetupData } from "./components/wizard/types";
 
 function App() {

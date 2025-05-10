@@ -23,7 +23,13 @@ const allPosts = (await getCollection("post")).filter((post) => post.data.publis
     type: "post",
 }));
 
-const allPages = [...allProjects, ...allPosts];
+const allApps = (await getCollection("app")).filter((app) => app.data.published).map((app) => ({
+    path: `/apps/${app.slug}`,
+    title: app.data.title,
+    type: "app",
+}));
+
+const allPages = [...allProjects, ...allPosts, ...allApps];
 
 const randomPage = allPages[Math.floor(Math.random() * allPages.length)];
 ---
@@ -39,6 +45,7 @@ const randomPage = allPages[Math.floor(Math.random() * allPages.length)];
                 Or
                 {randomPage.type === "project" && " check out "}
                 {randomPage.type === "post" && " read this "}
+                {randomPage.type === "app" && " try this "}
                 {randomPage.type}:
                 <a href={randomPage.path} class="random-link"
                     >{randomPage.title}</a

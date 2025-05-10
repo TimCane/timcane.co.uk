@@ -3,7 +3,7 @@ import { colors } from '../../../theme/colors';
 import { AnimatedRipple } from '../../common/animated-ripple';
 import { useWizard } from '../context/wizard-context';
 import type { SetCount } from '../types';
-import { useRippleAnimation } from '../../../hooks/useRippleAnimation';
+import { useRippleAnimation } from '../../../hooks/use-ripple-animation';
 import { ButtonGroup, Button } from '../theme/button.styles';
 import { Title } from '../theme/title.styles';
 

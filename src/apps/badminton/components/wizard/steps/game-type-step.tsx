@@ -2,7 +2,7 @@ import React from 'react';
 import { useWizard } from '../context/wizard-context';
 import type { GameType } from '../types';
 import { colors } from '@/apps/badminton/theme/colors';
-import { useRippleAnimation } from '../../../hooks/useRippleAnimation';
+import { useRippleAnimation } from '../../../hooks/use-ripple-animation';
 import { AnimatedRipple } from '../../common/animated-ripple';
 import { ButtonGroup, Button } from '../theme/button.styles';
 import { Title } from '../theme/title.styles';
