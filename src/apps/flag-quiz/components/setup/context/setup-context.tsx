@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, type ReactNode } from 'react';
 import { Continent } from '../../../data/countries';
-import { Difficulty, QuizMode, defaultQuizSettings } from '../../../data/quiz';
+import { defaultQuizSettings } from '../../../data/quiz';
 import type { QuizSetupData } from '../types';
 
 interface SetupState {

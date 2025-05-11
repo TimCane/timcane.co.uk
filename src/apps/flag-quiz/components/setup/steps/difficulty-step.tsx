@@ -1,7 +1,6 @@
 import React from 'react';
 import { Difficulty } from '../../../data/quiz';
 import { useSetup } from '../context/setup-context';
-import { colors } from '../../../theme/colors';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
 import { ButtonGroup, NavigationButtons, ActionButton } from '../theme/button.styles';
@@ -64,18 +63,6 @@ export const DifficultyStep: React.FC = () => {
         return "6 options to choose from - test your knowledge with more choices";
       default:
         return "";
-    }
-  };
-
-  const getDifficultyColor = (difficulty: Difficulty, state: "normal" | "hover" | "active" = "normal") => {
-    // Use the same theme color for all difficulty levels
-    switch (state) {
-      case "hover":
-        return colors.themeHover;
-      case "active":
-        return colors.themeActive;
-      default:
-        return colors.theme;
     }
   };
 

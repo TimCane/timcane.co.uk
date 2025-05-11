@@ -1,7 +1,6 @@
 import React from 'react';
 import { QuizMode } from '../../../data/quiz';
 import { useSetup } from '../context/setup-context';
-import { colors } from '../../../theme/colors';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
 import { ButtonGroup, NavigationButtons, ActionButton } from '../theme/button.styles';
@@ -41,23 +40,11 @@ const StepContainer = styled.div`
 `;
 
 export const ModeStep: React.FC = () => {
-  const { state, updateData, nextStep, prevStep } = useSetup();
+  const { state, updateData, nextStep } = useSetup();
   const selectedMode = state.data.mode || QuizMode.FlagToCountry;
   
   const handleSelect = (mode: QuizMode) => {
     updateData('mode', mode);
-  };
-
-  const getModeColor = (mode: QuizMode, state: "normal" | "hover" | "active" = "normal") => {
-    // Use the same theme color for all modes
-    switch (state) {
-      case "hover":
-        return colors.themeHover;
-      case "active":
-        return colors.themeActive;
-      default:
-        return colors.theme;
-    }
   };
 
   const getModeDescription = (mode: QuizMode): string => {

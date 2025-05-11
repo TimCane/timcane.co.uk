@@ -4,7 +4,7 @@ import { colors } from '../../../theme/colors';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
 import { NavigationButtons, ActionButton } from '../theme/button.styles';
-import { getCountriesForContinents } from '../../../data/countries';
+import { getCountriesForContinents } from '@/apps/flag-quiz/data/countries';
 
 const StepContainer = styled.div`
   display: flex;
@@ -16,16 +16,16 @@ const StepContainer = styled.div`
 `;
 
 export const QuestionCountStep: React.FC = () => {
-  const { state, updateData, nextStep, prevStep } = useSetup();
+  const { state, updateData, nextStep, prevStep } = useSetup(); 
   const [maxCountries, setMaxCountries] = useState(50);
   const [sliderValue, setSliderValue] = useState(
-    state.data.questionCount <= 0 ? 10 : state.data.questionCount || 10
+    state.data.questionCount && state.data.questionCount <= 0 ? 10 : state.data.questionCount || 10
   );
   
   // Calculate the maximum number of countries based on selected continents
   useEffect(() => {
     if (state.data.continents && state.data.continents.length > 0) {
-      const countriesCount = getCountriesForContinents(state.data.continents).length;
+      const countriesCount = getCountriesForContinents(state.data.continents, 999, state.data.difficulty).length;
       setMaxCountries(countriesCount);
       
       // If current question count is higher than available countries, adjust it
@@ -199,31 +199,6 @@ const SliderValue = styled.div`
     margin: 1rem 0;
   }
 `;
-
-// Using Subtitle component from theme/title.styles.ts instead
-
-const EndlessOption = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem 0;
-`;
-
-const EndlessCheckbox = styled.input`
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  cursor: pointer;
-  accent-color: ${colors.theme};
-`;
-
-const EndlessLabel = styled.label`
-  font-size: 1.2rem;
-  color: ${colors.textPrimary};
-  cursor: pointer;
-`;
-
-// Removed unused styled components
 
 const TickLabels = styled.div`
   position: relative;

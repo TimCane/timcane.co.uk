@@ -8,7 +8,6 @@ import {
   Title, 
   FlexContainer,
   Card,
-  Button,
   ActionButton,
   Subtitle
 } from '../common/styled-components';
@@ -49,13 +48,6 @@ const SectionTitle = styled.h3`
   }
 `;
 
-const ResultNumber = styled.div`
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: ${colors.textSecondary};
-  margin-bottom: 0.5rem;
-`;
-
 const QuestionText = styled.span`
   font-size: 1rem;
   margin: 0 0.5rem;
@@ -81,36 +73,6 @@ const WrongSelection = styled.div`
   font-weight: 400;
   color: ${colors.textSecondary};
   margin-top: 0.25rem;
-`;
-
-// Styled components for auto-progression
-const ProgressContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin: 1rem 0;
-  position: relative;
-  padding: 1rem 0;
-`;
-
-const ProgressIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0.5rem 0 1rem;
-  position: relative;
-`;
-
-const ProgressDot = styled.div<{ $isActive: boolean }>`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${props => props.$isActive ? colors.theme : colors.borderLight};
-  margin: 0 0.5rem;
-  position: relative;
-  z-index: 2;
 `;
 
 const AutoProgressBar = styled.div<{ $duration: number }>`
@@ -164,7 +126,6 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
   const [quizResults, setQuizResults] = useState<QuizResult[]>([]);
   const [quizComplete, setQuizComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(0);
@@ -219,7 +180,6 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
 
     setSelectedAnswer(countryCode);
     setIsAnswered(true);
-    setIsCorrect(isAnswerCorrect);
 
     // Save result
     const result: QuizResult = {
@@ -675,35 +635,6 @@ const IncorrectIcon = styled.span`
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 16px;
-`;
-
-const FeedbackContainer = styled.div<{ $isCorrect: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border-radius: 8px;
-  background-color: ${props => props.$isCorrect ? colors.success + '33' : colors.danger + '33'};
-  width: 100%;
-  border: 1px solid ${props => props.$isCorrect ? colors.success : colors.danger};
-`;
-
-const FeedbackText = styled.div`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const CorrectAnswerText = styled.div`
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 0.5rem;
-  color: ${colors.textSecondary};
 `;
 
 const ScoreContainer = styled.div`
