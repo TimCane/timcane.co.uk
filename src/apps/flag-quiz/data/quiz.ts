@@ -71,22 +71,19 @@ export const generateQuizQuestions = (settings: QuizSettings): QuizQuestion[] =>
       throw new Error('No countries available for the selected continents');
     }
     
-    // Check if we're in endless mode (questionCount = -1)
-    const isEndlessMode = settings.questionCount === -1;
-    
-    // For non-endless mode, ensure we have enough countries for the quiz
-    if (!isEndlessMode && filteredCountries.length < settings.questionCount) {
+    // Ensure we have enough countries for the quiz
+    if (filteredCountries.length < settings.questionCount) {
       throw new Error('Not enough countries available for the selected continents and question count');
     }
 
-    // For endless mode, use all available countries; otherwise use the specified count
-    const questionCount = isEndlessMode ? filteredCountries.length : settings.questionCount;
+    // Use the specified question count
+    const questionCount = settings.questionCount;
     
     // Shuffle the filtered countries to ensure randomness
     const shuffledCountries = [...filteredCountries].sort(() => 0.5 - Math.random());
     
     // Get countries for the quiz
-    const selectedCountries = shuffledCountries.slice(0, isEndlessMode ? shuffledCountries.length : questionCount);
+    const selectedCountries = shuffledCountries.slice(0, questionCount);
     
     // Verify we have countries to create questions with
     if (selectedCountries.length === 0) {

@@ -19,7 +19,7 @@ export const QuestionCountStep: React.FC = () => {
   const { state, updateData, nextStep, prevStep } = useSetup();
   const [maxCountries, setMaxCountries] = useState(50);
   const [sliderValue, setSliderValue] = useState(
-    state.data.questionCount === -1 ? maxCountries + 1 : state.data.questionCount || 10
+    state.data.questionCount <= 0 ? 10 : state.data.questionCount || 10
   );
   
   // Calculate the maximum number of countries based on selected continents
@@ -40,18 +40,13 @@ export const QuestionCountStep: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     setSliderValue(value);
-    
-    // If slider is at max+1, it's endless mode
-    const questionCount = value > maxCountries ? -1 : value;
-    updateData('questionCount', questionCount);
+    updateData('questionCount', value);
   };
 
   const handleSubmit = () => {
     updateData('questionCount', sliderValue);
     nextStep();
   };
-  
-  const isEndless = sliderValue > maxCountries;
   
   // Generate tick marks for the slider
   const tickMarks = [];
@@ -60,8 +55,6 @@ export const QuestionCountStep: React.FC = () => {
   for (let i = 0; i <= maxCountries; i += interval) {
     tickMarks.push({ value: i });
   }
-  // Add the endless mark
-  tickMarks.push({ value: -1 });
 
   return (
     <StepContainer>
@@ -70,12 +63,12 @@ export const QuestionCountStep: React.FC = () => {
       <SliderContainer>
         <SliderLabel>
           <span>1</span>
-          <span>Endless</span>
+          <span>{maxCountries}</span>
         </SliderLabel>
         <Slider 
           type="range" 
           min={1} 
-          max={maxCountries + 1} 
+          max={maxCountries} 
           step={1}
           value={sliderValue}
           onChange={handleChange}
@@ -83,18 +76,16 @@ export const QuestionCountStep: React.FC = () => {
         <TickLabels>
           {tickMarks.map((mark, index) => {
             // Calculate position as percentage
-            const position = mark.value === -1 
-              ? 100 
-              : (mark.value / (maxCountries + 1)) * 100;
+            const position = (mark.value / maxCountries) * 100;
               
             // Only show some labels to avoid crowding
-            if (index % 2 === 0 || mark.value === -1) {
+            if (index % 2 === 0) {
               return (
                 <TickLabel 
                   key={mark.value} 
                   style={{ left: `${position}%` }}
                 >
-                  {mark.value === -1 ? '∞' : mark.value}
+                  {mark.value}
                 </TickLabel>
               );
             }
@@ -104,15 +95,11 @@ export const QuestionCountStep: React.FC = () => {
       </SliderContainer>
       
       <SliderValue>
-        {isEndless 
-          ? 'Endless mode' 
-          : `${sliderValue} question${sliderValue !== 1 ? 's' : ''}`}
+        {`${sliderValue} question${sliderValue !== 1 ? 's' : ''}`}
       </SliderValue>
       
       <Subtitle>
-        {isEndless 
-          ? 'Quiz will continue until you decide to stop.' 
-          : `Select how many questions you want in your quiz.`}
+        Select how many questions you want in your quiz.
       </Subtitle>
       
       <NavigationButtons>
