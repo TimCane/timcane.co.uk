@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from '/workspaces/timcane.co.uk/src/apps/flag-quiz/components/common/progress-bar';
+import ProgressBar from '@/apps/flag-quiz/components/common/progress-bar';
 
 interface SetupProgressBarProps {
   currentStep: number;
