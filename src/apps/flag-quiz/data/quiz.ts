@@ -1,4 +1,4 @@
-import { type Country, Continent, countries, getCountriesByContinent, getRandomCountries, getCountriesForContinents, getSimilarFlagOptions, filterCountriesByFamiliarity } from './countries';
+import { type Country, Continent, countries, filterCountriesByFamiliarity, getRandomCountries, getSimilarFlagOptions } from './countries';
 
 export enum QuizMode {
   FlagToCountry = 'flag-to-country',

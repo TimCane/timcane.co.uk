@@ -48,17 +48,6 @@ export const ContinentsStep: React.FC = () => {
     toggleContinent(continent);
   };
 
-  const getButtonColors = (state: "normal" | "hover" | "active" = "normal") => {
-    switch (state) {
-      case "hover":
-        return colors.themeHover;
-      case "active":
-        return colors.themeActive;
-      default:
-        return colors.theme;
-    }
-  };
-
   return (
     <StepContainer>
       <Title>Select Continents</Title>

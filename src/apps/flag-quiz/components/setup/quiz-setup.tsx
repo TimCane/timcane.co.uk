@@ -12,7 +12,7 @@ interface QuizSetupProps {
   userContinent?: Continent;
 }
 
-const QuizSetupContent: React.FC<{ onComplete: (data: QuizSetupData) => void; userContinent?: Continent }> = ({ onComplete, userContinent }) => {
+const QuizSetupContent: React.FC<{ onComplete: (data: QuizSetupData) => void; userContinent?: Continent }> = ({ onComplete }) => {
   const { state, isComplete } = useSetup();
   const CurrentStep = steps[state.currentStep]?.component;
 
