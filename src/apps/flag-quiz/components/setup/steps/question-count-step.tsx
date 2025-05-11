@@ -130,9 +130,13 @@ export const QuestionCountStep: React.FC = () => {
 const SliderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
+  
+  @media (min-width: 768px) {
+    margin: 2rem 0;
+  }
 `;
 
 const SliderLabel = styled.div`
@@ -145,11 +149,16 @@ const SliderLabel = styled.div`
 const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
-  height: 8px;
+  height: 6px;
   border-radius: 4px;
   background: ${colors.border};
   outline: none;
-  margin: 1rem 0;
+  margin: 0.75rem 0;
+  
+  @media (min-width: 768px) {
+    height: 8px;
+    margin: 1rem 0;
+  }
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -192,11 +201,16 @@ const Slider = styled.input`
 `;
 
 const SliderValue = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
-  margin: 1rem 0;
+  margin: 0.75rem 0;
   color: ${colors.theme};
+  
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
 `;
 
 // Using Subtitle component from theme/title.styles.ts instead
@@ -234,6 +248,10 @@ const TickLabels = styled.div`
 const TickLabel = styled.div`
   position: absolute;
   transform: translateX(-50%);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: ${colors.textSecondary};
+  
+  @media (min-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;

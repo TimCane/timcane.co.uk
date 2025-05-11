@@ -9,7 +9,26 @@ import { SelectableButton } from '../theme/selectable-button';
 
 const StyledSelectableButton = styled(SelectableButton)`
   margin: 0.5rem;
-  min-width: 150px;
+  max-width: 100%;
+  
+  @media (min-width: 768px) {
+    min-width: 150px;
+  }
+`;
+
+const ResponsiveButtonGroup = styled(ButtonGroup)`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  width: 90%;
+  max-width: 500px;
+  margin: 1rem auto;
+  
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const StepContainer = styled.div`
@@ -43,7 +62,7 @@ export const ContinentsStep: React.FC = () => {
   return (
     <StepContainer>
       <Title>Select Continents</Title>
-      <ButtonGroup>
+      <ResponsiveButtonGroup>
         {Object.values(Continent).map((continent) => (
           <StyledSelectableButton
             key={continent}
@@ -53,7 +72,7 @@ export const ContinentsStep: React.FC = () => {
             {continent}
           </StyledSelectableButton>
         ))}
-      </ButtonGroup>
+      </ResponsiveButtonGroup>
       
       <NavigationButtons>
         <ActionButton onClick={prevStep}>

@@ -9,7 +9,26 @@ import { SelectableButton } from '../theme/selectable-button';
 
 const StyledSelectableButton = styled(SelectableButton)`
   margin: 0.5rem;
-  min-width: 200px;
+  max-width: 100%;
+  
+  @media (min-width: 768px) {
+    min-width: 200px;
+  }
+`;
+
+const ResponsiveButtonGroup = styled(ButtonGroup)`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  width: 90%;
+  max-width: 500px;
+  margin: 1rem auto;
+  
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const StepContainer = styled.div`
@@ -70,17 +89,20 @@ export const ModeStep: React.FC = () => {
   return (
     <StepContainer>
       <Title>Select Quiz Mode</Title>
-      <ButtonGroup>
-        {Object.values(QuizMode).map((mode) => (
-          <StyledSelectableButton
-            key={mode}
-            selected={selectedMode === mode}
-            onClick={() => handleSelect(mode)}
-          >
-            {getModeDisplayName(mode)}
-          </StyledSelectableButton>
-        ))}
-      </ButtonGroup>
+      <ResponsiveButtonGroup>
+        {Object.values(QuizMode)
+          // Filter out the CountryToContinent mode
+          .filter(mode => mode !== QuizMode.CountryToContinent)
+          .map((mode) => (
+            <StyledSelectableButton
+              key={mode}
+              selected={selectedMode === mode}
+              onClick={() => handleSelect(mode)}
+            >
+              {getModeDisplayName(mode)}
+            </StyledSelectableButton>
+          ))}
+      </ResponsiveButtonGroup>
       
       {selectedMode && (
         <Subtitle>{getModeDescription(selectedMode)}</Subtitle>

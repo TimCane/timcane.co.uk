@@ -10,8 +10,8 @@ interface SelectableButtonProps {
 }
 
 const ButtonContainer = styled.button<{ $selected: boolean }>`
-  padding: 1.25rem 2rem;
-  font-size: 1.25rem;
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
   border: 2px solid ${colors.theme};
   border-radius: 8px;
   background-color: ${props => props.$selected ? colors.background : colors.theme};
@@ -25,7 +25,6 @@ const ButtonContainer = styled.button<{ $selected: boolean }>`
   @media (min-width: 768px) {
     padding: 1.5rem 3rem;
     font-size: 1.5rem;
-    width: auto;
   }
 
   &:hover {
@@ -45,7 +44,7 @@ const SelectionIcon = styled.span`
   right: -8px;
   font-size: 1rem;
   font-weight: bold;
-  color: white;
+  color: ${colors.background};
   background-color: ${colors.theme};
   border-radius: 50%;
   width: 20px;
@@ -63,7 +62,6 @@ const SelectionIcon = styled.span`
     width: 24px;
     height: 24px;
     padding: 16px;
-  }
 `;
 
 export const SelectableButton: React.FC<SelectableButtonProps> = ({ 
@@ -75,7 +73,7 @@ export const SelectableButton: React.FC<SelectableButtonProps> = ({
   return (
     <ButtonContainer $selected={selected} onClick={onClick} className={className}>
       {children}
-      {selected && <SelectionIcon>✓</SelectionIcon>}
+      {selected && <SelectionIcon>X</SelectionIcon>}
     </ButtonContainer>
   );
 };

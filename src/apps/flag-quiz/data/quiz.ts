@@ -107,10 +107,53 @@ export const generateQuizQuestions = (settings: QuizSettings): QuizQuestion[] =>
         const availableOptionCount = Math.max(2, Math.min(optionCount, otherCountries.length + 1));
         const neededOtherOptions = availableOptionCount - 1;
         
-        // Get random countries for options
-        const otherOptions = [...otherCountries]
-          .sort(() => 0.5 - Math.random())
-          .slice(0, neededOtherOptions);
+        // Try to include similar flags to make the game more challenging
+        let otherOptions: Country[] = [];
+        
+        // Check if the country has similar flags defined
+        if (country.similarFlags && country.similarFlags.length > 0 && settings.difficulty !== Difficulty.Easy) {
+          // Get countries with similar flags
+          const similarCountries = otherCountries.filter(c => 
+            country.similarFlags?.includes(c.code)
+          );
+          
+          // Determine how many similar flags to include based on difficulty
+          const similarFlagsToInclude = settings.difficulty === Difficulty.Hard
+            ? Math.min(Math.ceil(neededOtherOptions * 0.7), similarCountries.length) // 70% similar flags for Hard
+            : Math.min(Math.ceil(neededOtherOptions * 0.4), similarCountries.length); // 40% similar flags for Medium
+          
+          // Add similar countries to options
+          if (similarCountries.length > 0) {
+            const selectedSimilarCountries = [...similarCountries]
+              .sort(() => 0.5 - Math.random())
+              .slice(0, similarFlagsToInclude);
+            
+            otherOptions = [...selectedSimilarCountries];
+            
+            // Fill remaining slots with random countries
+            if (otherOptions.length < neededOtherOptions) {
+              const remainingCountries = otherCountries.filter(c => 
+                !otherOptions.some(o => o.code === c.code)
+              );
+              
+              const randomCountries = [...remainingCountries]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, neededOtherOptions - otherOptions.length);
+              
+              otherOptions = [...otherOptions, ...randomCountries];
+            }
+          } else {
+            // Fallback to random selection if no similar flags are available
+            otherOptions = [...otherCountries]
+              .sort(() => 0.5 - Math.random())
+              .slice(0, neededOtherOptions);
+          }
+        } else {
+          // For Easy difficulty or countries without similar flags, use random selection
+          otherOptions = [...otherCountries]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, neededOtherOptions);
+        }
         
         // Combine correct answer with other options and shuffle
         const options = [country, ...otherOptions].sort(() => 0.5 - Math.random());
