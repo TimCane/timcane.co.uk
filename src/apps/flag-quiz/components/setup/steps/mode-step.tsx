@@ -3,7 +3,7 @@ import { QuizMode } from '../../../data/quiz';
 import { useSetup } from '../context/setup-context';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
-import { ButtonGroup, NavigationButtons, ActionButton } from '../theme/button.styles';
+import { ButtonGroup } from '../theme/button.styles';
 import { SelectableButton } from '../theme/selectable-button';
 
 const StyledSelectableButton = styled(SelectableButton)`
@@ -40,7 +40,7 @@ const StepContainer = styled.div`
 `;
 
 export const ModeStep: React.FC = () => {
-  const { state, updateData, nextStep } = useSetup();
+  const { state, updateData } = useSetup();
   const selectedMode = state.data.mode || QuizMode.FlagToCountry;
   
   const handleSelect = (mode: QuizMode) => {
@@ -94,13 +94,6 @@ export const ModeStep: React.FC = () => {
       {selectedMode && (
         <Subtitle>{getModeDescription(selectedMode)}</Subtitle>
       )}
-      
-      <NavigationButtons>
-        <div></div> {/* Empty div for spacing */}
-        <ActionButton $primary onClick={nextStep}>
-          Next
-        </ActionButton>
-      </NavigationButtons>
     </StepContainer>
   );
 };
