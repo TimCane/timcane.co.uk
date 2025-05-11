@@ -421,16 +421,18 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
             return (
               <OptionContainer key={option.code}>
                 {!isAnswered ? (
-                  <SelectableButton
+                  <FixedHeightSelectableButton
                     selected={false}
                     onClick={() => handleAnswerSelect(option.code)}
                   >
-                    {settings.mode === 'country-to-flag' ? (
-                      <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
-                    ) : (
-                      settings.mode === 'country-to-continent' ? option.continent : option.name
-                    )}
-                  </SelectableButton>
+                    <ButtonContent>
+                      {settings.mode === 'country-to-flag' ? (
+                        <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
+                      ) : (
+                        settings.mode === 'country-to-continent' ? option.continent : option.name
+                      )}
+                    </ButtonContent>
+                  </FixedHeightSelectableButton>
                 ) : (
                   <AnswerButton
                     $isCorrect={showCorrectHighlight}
@@ -438,11 +440,13 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
                     $isSelected={isSelected}
                     disabled
                   >
-                    {settings.mode === 'country-to-flag' ? (
-                      <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
-                    ) : (
-                      settings.mode === 'country-to-continent' ? option.continent : option.name
-                    )}
+                    <ButtonContent>
+                      {settings.mode === 'country-to-flag' ? (
+                        <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
+                      ) : (
+                        settings.mode === 'country-to-continent' ? option.continent : option.name
+                      )}
+                    </ButtonContent>
                     {showCorrectHighlight && <CorrectIcon>✓</CorrectIcon>}
                     {showIncorrectHighlight && <IncorrectIcon>✗</IncorrectIcon>}
                   </AnswerButton>
@@ -575,7 +579,29 @@ const OptionsGrid = styled.div`
 const OptionContainer = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+`;
+
+const FixedHeightSelectableButton = styled(SelectableButton)`
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @media (min-width: 768px) {
+    height: 100px;
+  }
 `;
 
 const AnswerButton = styled.button<{
@@ -603,12 +629,14 @@ const AnswerButton = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50px;
+  text-align: center;
+  height: 80px; /* Fixed height for consistency */
   box-shadow: ${props => props.$isSelected ? `0 4px 8px rgba(0, 0, 0, 0.2)` : 'none'};
   
   @media (min-width: 768px) {
     padding: 1.2rem 2rem;
     font-size: 1.2rem;
+    height: 100px; /* Taller on desktop */
     min-height: 60px;
   }
 `;

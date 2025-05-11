@@ -1,4 +1,4 @@
-import { type Country, Continent, countries, getCountriesByContinent, getRandomCountries, getCountriesForContinents, getSimilarFlagOptions } from './countries';
+import { type Country, Continent, countries, getCountriesByContinent, getRandomCountries, getCountriesForContinents, getSimilarFlagOptions, filterCountriesByFamiliarity } from './countries';
 
 export enum QuizMode {
   FlagToCountry = 'flag-to-country',
@@ -9,7 +9,8 @@ export enum QuizMode {
 export enum Difficulty {
   Easy = 'easy',
   Medium = 'medium',
-  Hard = 'hard'
+  Hard = 'hard',
+  Impossible = 'impossible'
 }
 
 export interface QuizSettings {
@@ -51,7 +52,8 @@ export const defaultQuizSettings: QuizSettings = {
 const optionCountByDifficulty = {
   [Difficulty.Easy]: 3,
   [Difficulty.Medium]: 4,
-  [Difficulty.Hard]: 6
+  [Difficulty.Hard]: 6,
+  [Difficulty.Impossible]: 6 // Same as hard, but with more challenging options
 };
 
 /**
@@ -79,11 +81,16 @@ export const generateQuizQuestions = (settings: QuizSettings): QuizQuestion[] =>
     // Use the specified question count
     const questionCount = settings.questionCount;
     
-    // Shuffle the filtered countries to ensure randomness
-    const shuffledCountries = [...filteredCountries].sort(() => 0.5 - Math.random());
+    // Filter countries based on familiarity and difficulty
+    // This will prioritize well-known countries for easy difficulty and less familiar ones for harder difficulties
+    const difficultyFilteredCountries = getRandomCountries(
+      questionCount,
+      filteredCountries,
+      settings.difficulty as 'easy' | 'medium' | 'hard' | 'impossible'
+    );
     
     // Get countries for the quiz
-    const selectedCountries = shuffledCountries.slice(0, questionCount);
+    const selectedCountries = difficultyFilteredCountries;
     
     // Verify we have countries to create questions with
     if (selectedCountries.length === 0) {
@@ -99,18 +106,25 @@ export const generateQuizQuestions = (settings: QuizSettings): QuizQuestion[] =>
         // Get all countries that could be used as options, excluding the correct answer
         const otherCountries = filteredCountries.filter(c => c.code !== country.code);
         
+        // Filter other countries based on familiarity and difficulty level
+        // This ensures that the options are appropriate for the selected difficulty
+        const difficultyFilteredOptions = filterCountriesByFamiliarity(
+          otherCountries,
+          settings.difficulty as 'easy' | 'medium' | 'hard' | 'impossible'
+        );
+        
         // If we don't have enough countries for the options, adjust the option count
         // Make sure we have at least 2 options total (the correct answer + at least 1 other)
-        const availableOptionCount = Math.max(2, Math.min(optionCount, otherCountries.length + 1));
+        const availableOptionCount = Math.max(2, Math.min(optionCount, difficultyFilteredOptions.length + 1));
         const neededOtherOptions = availableOptionCount - 1;
         
         // Get options using the similar flags feature to make the game harder
-        // This will include similar flags based on difficulty level
+        // This will include similar flags based on difficulty level and familiarity
         const otherOptions = getSimilarFlagOptions(
           country,
-          otherCountries,
+          difficultyFilteredOptions,
           neededOtherOptions,
-          settings.difficulty
+          settings.difficulty as 'easy' | 'medium' | 'hard' | 'impossible'
         );
         
         // Combine correct answer with other options and shuffle
