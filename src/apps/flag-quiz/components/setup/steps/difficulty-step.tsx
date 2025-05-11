@@ -3,7 +3,7 @@ import { Difficulty } from '../../../data/quiz';
 import { useSetup } from '../context/setup-context';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
-import { ButtonGroup, NavigationButtons, ActionButton } from '../theme/button.styles';
+import { ButtonGroup } from '../theme/button.styles';
 import { SelectableButton } from '../theme/selectable-button';
 
 const StyledSelectableButton = styled(SelectableButton)`
@@ -40,7 +40,7 @@ const StepContainer = styled.div`
 `;
 
 export const DifficultyStep: React.FC = () => {
-  const { state, updateData, nextStep, prevStep } = useSetup();
+  const { state, updateData } = useSetup();
   const selectedDifficulty = state.data.difficulty || Difficulty.Medium;
   
   const handleSelect = (difficulty: Difficulty) => {
@@ -84,15 +84,6 @@ export const DifficultyStep: React.FC = () => {
       {selectedDifficulty && (
         <Subtitle>{getDifficultyDescription(selectedDifficulty)}</Subtitle>
       )}
-      
-      <NavigationButtons>
-        <ActionButton onClick={prevStep}>
-          Back
-        </ActionButton>
-        <ActionButton $primary onClick={nextStep}>
-          Next
-        </ActionButton>
-      </NavigationButtons>
     </StepContainer>
   );
 };

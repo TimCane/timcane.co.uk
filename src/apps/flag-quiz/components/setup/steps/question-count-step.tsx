@@ -3,7 +3,7 @@ import { useSetup } from '../context/setup-context';
 import { colors } from '../../../theme/colors';
 import styled from 'styled-components';
 import { Title, Subtitle } from '../theme/title.styles';
-import { NavigationButtons, ActionButton } from '../theme/button.styles';
+// Navigation buttons moved to parent component
 import { getCountriesForContinents } from '@/apps/flag-quiz/data/countries';
 
 const StepContainer = styled.div`
@@ -16,7 +16,7 @@ const StepContainer = styled.div`
 `;
 
 export const QuestionCountStep: React.FC = () => {
-  const { state, updateData, nextStep, prevStep } = useSetup(); 
+  const { state, updateData } = useSetup(); 
   const [maxCountries, setMaxCountries] = useState(50);
   const [sliderValue, setSliderValue] = useState(
     state.data.questionCount && state.data.questionCount <= 0 ? 10 : state.data.questionCount || 10
@@ -43,11 +43,6 @@ export const QuestionCountStep: React.FC = () => {
     updateData('questionCount', value);
   };
 
-  const handleSubmit = () => {
-    updateData('questionCount', sliderValue);
-    nextStep();
-  };
-  
   // Generate tick marks for the slider
   const tickMarks = [];
   // Create tick marks at intervals of 5 or 10 depending on max countries
@@ -101,15 +96,6 @@ export const QuestionCountStep: React.FC = () => {
       <Subtitle>
         Select how many questions you want in your quiz.
       </Subtitle>
-      
-      <NavigationButtons>
-        <ActionButton onClick={prevStep}>
-          Back
-        </ActionButton>
-        <ActionButton $primary onClick={handleSubmit}>
-          Start Quiz
-        </ActionButton>
-      </NavigationButtons>
     </StepContainer>
   );
 };
