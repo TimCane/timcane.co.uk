@@ -4,16 +4,84 @@ import { colors } from '../../theme/colors';
 import type { QuizSetupData } from './types';
 import { generateQuizQuestions, type QuizQuestion, type QuizResult, type QuizSummary } from '../../data/quiz';
 import { getFlagUrl } from '../../data/flags';
-import {
-  Title,
+import { 
+  Title, 
   FlexContainer,
   Card,
   Button,
   ActionButton,
-  ProgressBarContainer,
-  ProgressBarFill
+  Subtitle
 } from '../common/styled-components';
+import ProgressBar from '../common/progress-bar';
 import { SelectableButton } from '../setup/theme/selectable-button';
+
+// Results screen styled components
+const ResultsHeader = styled.div`
+  text-align: center;
+  margin-bottom: 1.5rem;
+`;
+
+const ScoreCircleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+`;
+
+const ResultsSection = styled.div`
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 1rem;
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: ${colors.textPrimary};
+  margin-bottom: 1rem;
+  text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const ResultNumber = styled.div`
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: ${colors.textSecondary};
+  margin-bottom: 0.5rem;
+`;
+
+const QuestionText = styled.span`
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  color: ${colors.textPrimary};
+`;
+
+const CorrectAnswer = styled.div`
+  color: ${colors.success};
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+`;
+
+const IncorrectAnswer = styled.div`
+  color: ${colors.danger};
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrongSelection = styled.div`
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: ${colors.textSecondary};
+  margin-top: 0.25rem;
+`;
 
 // Styled components for auto-progression
 const ProgressContainer = styled.div`
@@ -228,15 +296,34 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
   if (quizComplete) {
     const summary = getQuizSummary();
     const scorePercentage = Math.round((summary.correctAnswers / summary.totalQuestions) * 100);
+    
+    // Determine performance level
+    let performanceMessage = "";
+    if (scorePercentage >= 90) {
+      performanceMessage = "Excellent! You're a flag expert!";
+    } else if (scorePercentage >= 70) {
+      performanceMessage = "Great job! You know your flags well!";
+    } else if (scorePercentage >= 50) {
+      performanceMessage = "Good effort! Keep practicing!";
+    } else {
+      performanceMessage = "Keep learning! You'll get better with practice.";
+    }
 
     return (
       <GameContainer>
         <QuizCard>
-          <Title>Quiz Complete!</Title>
+          <ResultsHeader>
+            <Title>Quiz Complete!</Title>
+            <Subtitle>{performanceMessage}</Subtitle>
+          </ResultsHeader>
+          
           <ScoreContainer>
-            <ScoreCircle $percentage={scorePercentage}>
-              <ScoreText>{scorePercentage}%</ScoreText>
-            </ScoreCircle>
+            <ScoreCircleContainer>
+              <ScoreCircle $percentage={scorePercentage}>
+                <ScoreText>{scorePercentage}%</ScoreText>
+              </ScoreCircle>
+            </ScoreCircleContainer>
+            
             <ScoreDetails>
               <ScoreItem>
                 <span>Correct Answers:</span>
@@ -244,7 +331,7 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
               </ScoreItem>
               <ScoreItem>
                 <span>Total Time:</span>
-                <span>{Math.round(summary.totalTime / 1000)} seconds</span>
+                <span>{Math.floor(summary.totalTime / 60000)} min {Math.floor((summary.totalTime % 60000) / 1000)} sec</span>
               </ScoreItem>
               <ScoreItem>
                 <span>Average Time Per Question:</span>
@@ -253,35 +340,44 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
             </ScoreDetails>
           </ScoreContainer>
 
-          <ResultsGrid>
-            {summary.results.map((result, index) => (
-              <ResultCard key={index} $isCorrect={result.isCorrect}>
-                <ResultQuestion>
-                  {settings.mode === 'flag-to-country' ? (
-                    <>
-                      <FlagImageSmall src={getFlagUrl(result.question.correctAnswer.code)} alt={result.question.correctAnswer.name} />
-                      <span>→ {result.question.correctAnswer.name}</span>
-                    </>
-                  ) : settings.mode === 'country-to-flag' ? (
-                    <>
-                      <span>{result.question.correctAnswer.name} →</span>
-                      <FlagImageSmall src={getFlagUrl(result.question.correctAnswer.code)} alt={result.question.correctAnswer.name} />
-                    </>
-                  ) : (
-                    <>
-                      <span>{result.question.correctAnswer.name} → {result.question.correctAnswer.continent}</span>
-                    </>
-                  )}
-                </ResultQuestion>
-                <ResultAnswer $isCorrect={result.isCorrect}>
-                  {result.isCorrect ? '✓ Correct' : '✗ Incorrect'}
-                  {!result.isCorrect && result.selectedAnswer && (
-                    <div>You selected: {result.selectedAnswer.name}</div>
-                  )}
-                </ResultAnswer>
-              </ResultCard>
-            ))}
-          </ResultsGrid>
+          <ResultsSection>
+            <SectionTitle>Question Review</SectionTitle>
+            <ResultsGrid>
+              {summary.results.map((result, index) => (
+                <ResultCard key={index} $isCorrect={result.isCorrect}>
+                  <ResultQuestion>
+                    {settings.mode === 'flag-to-country' ? (
+                      <>
+                        <FlagImageSmall src={getFlagUrl(result.question.correctAnswer.code)} alt={result.question.correctAnswer.name} />
+                        <QuestionText>→ {result.question.correctAnswer.name}</QuestionText>
+                      </>
+                    ) : settings.mode === 'country-to-flag' ? (
+                      <>
+                        <QuestionText>{result.question.correctAnswer.name} →</QuestionText>
+                        <FlagImageSmall src={getFlagUrl(result.question.correctAnswer.code)} alt={result.question.correctAnswer.name} />
+                      </>
+                    ) : (
+                      <>
+                        <QuestionText>{result.question.correctAnswer.name} → {result.question.correctAnswer.continent}</QuestionText>
+                      </>
+                    )}
+                  </ResultQuestion>
+                  <ResultAnswer $isCorrect={result.isCorrect}>
+                    {result.isCorrect ? (
+                      <CorrectAnswer>✓ Correct</CorrectAnswer>
+                    ) : (
+                      <IncorrectAnswer>
+                        ✗ Incorrect
+                        {result.selectedAnswer && (
+                          <WrongSelection>You selected: {result.selectedAnswer.name}</WrongSelection>
+                        )}
+                      </IncorrectAnswer>
+                    )}
+                  </ResultAnswer>
+                </ResultCard>
+              ))}
+            </ResultsGrid>
+          </ResultsSection>
 
           <ButtonContainer>
             <ActionButton onClick={handleRestartQuiz} $primary>
@@ -298,9 +394,7 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
 
   return (
     <GameContainer>
-      <ProgressBarContainer>
-        <ProgressBarFill $progress={progress} style={{ backgroundColor: colors.theme }} />
-      </ProgressBarContainer>
+      <ProgressBar progress={progress} color={colors.theme} />
 
       <QuestionCounter>
         Question {currentQuestionIndex + 1} of {questions.length}
@@ -332,7 +426,7 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
                     onClick={() => handleAnswerSelect(option.code)}
                   >
                     {settings.mode === 'country-to-flag' ? (
-                      <FlagImageSmall src={getFlagUrl(option.code)} alt={option.name} />
+                      <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
                     ) : (
                       settings.mode === 'country-to-continent' ? option.continent : option.name
                     )}
@@ -345,7 +439,7 @@ const FlagQuizGame: React.FC<FlagQuizGameProps> = ({ settings, onBackToSetup }) 
                     disabled
                   >
                     {settings.mode === 'country-to-flag' ? (
-                      <FlagImageSmall src={getFlagUrl(option.code)} alt={option.name} />
+                      <FlagImageAnswer src={getFlagUrl(option.code)} alt={option.name} />
                     ) : (
                       settings.mode === 'country-to-continent' ? option.continent : option.name
                     )}
@@ -436,13 +530,22 @@ const FlagImage = styled.img`
 `;
 
 const FlagImageSmall = styled.img`
-  width: 100%;
-  max-width: 120px;
+  width: 40px;
+  height: auto;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${colors.border};
+`;
+
+const FlagImageAnswer = styled.img`
+  width: 80px;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid ${colors.border};
+  display: block;
+  margin: 0 auto;
   
   @media (max-width: 768px) {
-    max-width: 100px;
+    width: 90px;
   }
 `;
 
@@ -546,8 +649,6 @@ const IncorrectIcon = styled.span`
   padding: 16px;
 `;
 
-
-
 const FeedbackContainer = styled.div<{ $isCorrect: boolean }>`
   display: flex;
   flex-direction: column;
@@ -581,85 +682,79 @@ const ScoreContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
-  width: 100%;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
 `;
 
 const ScoreCircle = styled.div<{ $percentage: number }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   background: conic-gradient(
-    ${props => props.$percentage >= 70 ? colors.success : props.$percentage >= 40 ? colors.caution : colors.danger} 
-    ${props => props.$percentage}%, 
-    ${colors.surface} 0%
+    ${colors.theme} ${props => props.$percentage}%,
+    ${colors.border} ${props => props.$percentage}% 100%
   );
-  box-shadow: 0 4px 8px ${colors.shadow};
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  margin-bottom: 1.5rem;
   
-  &::after {
+  &::before {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    background: ${colors.surface};
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    z-index: 0;
+    background-color: ${colors.background};
   }
   
-  @media (max-width: 768px) {
-    width: 120px;
-    height: 120px;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
   }
 `;
 
-const ScoreText = styled.span`
+const ScoreText = styled.div`
   font-size: 2.5rem;
   font-weight: 700;
   color: ${colors.textPrimary};
-  position: relative;
   z-index: 1;
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
 `;
 
 const ScoreDetails = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-  }
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 8px;
 `;
 
 const ScoreItem = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 1.2rem;
+  gap: 1.5rem;
+  font-size: 1.1rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid ${colors.borderLight};
+  border-bottom: 1px solid ${colors.border};
+  
+  &:last-child {
+    border-bottom: none;
+  }
   
   span:first-child {
+    font-weight: 500;
     color: ${colors.textSecondary};
   }
   
   span:last-child {
     font-weight: 600;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
+    color: ${colors.textPrimary};
   }
 `;
 
@@ -677,44 +772,49 @@ const ButtonContainer = styled.div`
 `;
 
 const ResultsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  margin: 1rem 0 2rem 0;
-  max-height: 400px;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    max-height: 300px;
-  }
-`;
-
-const ResultCard = styled.div<{ $isCorrect: boolean }>`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: ${props => props.$isCorrect ? `${colors.success}15` : `${colors.danger}15`};
-  border: 1px solid ${props => props.$isCorrect ? colors.success : colors.danger};
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
 `;
 
 const ResultQuestion = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
   font-size: 1rem;
+  padding: 0.75rem 0.5rem;
+  background-color: ${colors.surface};
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+`;
+
+const ResultCard = styled.div<{ $isCorrect: boolean }>`
+  border-radius: 8px;
+  padding: 1rem;
+  border: 2px solid ${props => props.$isCorrect ? colors.success : colors.danger};
+  background-color: ${props => props.$isCorrect ? `${colors.success}33` : `${colors.danger}33`};
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const ResultAnswer = styled.div<{ $isCorrect: boolean }>`
   font-weight: 600;
   color: ${props => props.$isCorrect ? colors.success : colors.danger};
   font-size: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  background-color: ${props => props.$isCorrect ? `${colors.success}22` : `${colors.danger}22`};
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
 `;
-
-
 
 export default FlagQuizGame;

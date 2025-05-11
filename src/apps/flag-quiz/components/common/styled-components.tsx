@@ -148,18 +148,4 @@ export const CheckboxLabel = styled.label`
   cursor: pointer;
 `;
 
-export const ProgressBarContainer = styled.div`
-  width: 100%;
-  height: 10px;
-  background-color: ${colors.surface};
-  border-radius: 5px;
-  margin: 1rem 0;
-  overflow: hidden;
-`;
-
-export const ProgressBarFill = styled.div<{ $progress: number }>`
-  height: 100%;
-  width: ${props => props.$progress}%;
-  background-color: ${colors.primary};
-  transition: width 0.3s ease-in-out;
-`;
+// Progress bar components have been moved to components/common/progress-bar.tsx
