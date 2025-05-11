@@ -1,0 +1,8 @@
+---
+import AppLayout from "@/layouts/app.layout.astro";
+import App from "@/apps/flag-quiz/app";
+---
+
+<AppLayout title="Flag Quiz" description="Test your knowledge of world flags">
+    <App client:only />
+</AppLayout>

@@ -1,0 +1,168 @@
+---
+export const prerender = true;
+import PageLayout from "@/layouts/portfolio-page.layout.astro";
+import { getCollection } from "astro:content";
+
+const apps = (await getCollection("app"))
+    .filter((app) => app.data.published)
+    .sort(
+        (a, b) =>
+            new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+    );
+
+const featuredApps = apps.filter((app) => app.data.featured);
+const otherApps = apps.filter((app) => !app.data.featured);
+---
+
+<PageLayout
+    title="Apps"
+    description="Tim Cane's Apps - Web Development and Software Engineering"
+>
+    <h1>Apps</h1>
+
+    {
+        featuredApps.length > 0 && (
+            <section class="apps-section">
+                <h2>Featured Apps</h2>
+                <div class="apps-grid">
+                    {featuredApps.map((app) => (
+                        <article class="app-card">
+                            <a
+                                href={`/apps/${app.slug}`}
+                                class="app-link"
+                            >
+                                <h3 class="app-title">
+                                    {app.data.title}
+                                </h3>
+                                <p class="app-description">
+                                    {app.data.description}
+                                </p>
+                                <div class="app-tags">
+                                    {app.data.tags?.map((tag) => (
+                                        <span class="app-tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </a>
+                        </article>
+                    ))}
+                </div>
+            </section>
+        )
+    }
+
+    {
+        otherApps.length > 0 && (
+            <section class="apps-section">
+                <h2>Other Apps</h2>
+                <div class="apps-grid">
+                    {otherApps.map((app) => (
+                        <article class="app-card">
+                            <a
+                                href={`/apps/${app.slug}`}
+                                class="app-link"
+                            >
+                                <h3 class="app-title">
+                                    {app.data.title}
+                                </h3>
+                                <p class="app-description">
+                                    {app.data.description}
+                                </p>
+                                <div class="app-tags">
+                                    {app.data.tags?.map((tag) => (
+                                        <span class="app-tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </a>
+                        </article>
+                    ))}
+                </div>
+            </section>
+        )
+    }
+</PageLayout>
+
+<style>
+    h1 {
+        color: var(--primary);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .apps-section {
+        margin-bottom: var(--spacing-xxl);
+    }
+
+    .apps-section h2 {
+        color: var(--primary);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+    }
+
+    .app-card {
+        border: 1px solid var(--secondary-transparent);
+        border-radius: var(--border-radius);
+        transition:
+            transform 0.2s ease,
+            border-color 0.2s ease;
+        height: 100%;
+    }
+
+    .app-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--primary);
+    }
+
+    .app-link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: var(--spacing-lg);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .app-title {
+        color: var(--primary);
+        margin: 0 0 var(--spacing-sm);
+        font-size: 1.5rem;
+    }
+
+    .app-description {
+        color: var(--secondary);
+        margin: 0 0 var(--spacing-md);
+        line-height: 1.5;
+        flex-grow: 1;
+    }
+
+    .app-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+
+    .app-tag {
+        background-color: var(--secondary-transparent);
+        color: var(--secondary);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .apps-container {
+            padding: var(--spacing-md);
+        }
+
+        .apps-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .app-link {
+            padding: var(--spacing-md);
+        }
+    }
+</style>

@@ -1,13 +1,13 @@
 ---
 export const prerender = false;
-import PortfolioErrorLayout from "@/layouts/portfolio-error.layout.astro";
+import PageLayout from "@/layouts/portfolio-error.layout.astro";
 ---
 
-<PortfolioErrorLayout
+<PageLayout
     title="500 - Server Error"
     description="Something went wrong on our end"
     errorCode="500"
     errorMessage="Server Error"
 >
     Something went wrong on our end. Please try again later.
-</PortfolioErrorLayout>
+</PageLayout>

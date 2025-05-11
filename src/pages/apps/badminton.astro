@@ -1,0 +1,8 @@
+---
+import AppLayout from "@/layouts/app.layout.astro";
+import App from "@/apps/badminton/app";
+---
+
+<AppLayout title="Badminton" description="Badminton Score Tracker">
+    <App client:only />
+</AppLayout>
